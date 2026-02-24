@@ -62,13 +62,13 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 .frow-desc{font-size:12.5px;color:rgba(255,255,255,0.5);line-height:1.5;}
 
 /* REALISTIC DEVICE MOCKUP */
-.device-bezel { background: #000; padding: 12px; border-radius: 28px; box-shadow: 0 24px 60px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.1); position: relative; width: 100%; max-width: 500px; margin: 0 auto; }
-.device-bezel.desktop { max-width: 800px; border-radius: 12px; padding: 8px; }
+.device-bezel { background: #000; padding: 12px; border-radius: 28px; box-shadow: 0 24px 60px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.1); position: relative; width: 100%; max-width: 500px; margin: 0 auto; height: 520px; }
+.device-bezel.desktop { max-width: 800px; border-radius: 12px; padding: 8px; height: 450px; }
 .device-camera { position: absolute; top: 50%; left: 4px; width: 6px; height: 6px; background: #111; border-radius: 50%; border: 1px solid #333; transform: translateY(-50%); }
 .desktop .device-camera { top: 4px; left: 50%; transform: translateX(-50%); }
-.mock{background:var(--navy2);border-radius:18px;overflow:hidden; position: relative; height: 500px; display: flex; flex-direction: column;}
-.desktop .mock { height: 450px; border-radius: 8px; }
-.mock-bar{background:rgba(255,255,255,0.03);padding:12px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border); backdrop-filter: blur(10px);}
+.mock{background:var(--navy2);border-radius:18px;overflow:hidden; position: relative; height: 100%; display: flex; flex-direction: column;}
+.desktop .mock { border-radius: 8px; }
+.mock-bar{background:rgba(255,255,255,0.03);padding:12px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border); backdrop-filter: blur(10px); flex-shrink: 0;}
 .mock-dot{width:8px;height:8px;border-radius:50%;}
 .mock-title{font-size:11px;color:rgba(255,255,255,0.5);margin-left:auto;font-weight:600; text-transform: uppercase; letter-spacing: 1px;}
 .mock-body{padding:20px; overflow-y: auto; flex: 1; background: linear-gradient(180deg, var(--navy2) 0%, var(--navy) 100%);}
@@ -83,15 +83,14 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 
 .stat-row{display:grid;gap:12px;margin-bottom:20px;}
 .stat-row-4{grid-template-columns:repeat(4,1fr);}
+.stat-row-3{grid-template-columns:repeat(3,1fr);}
 .stat-box{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center; transition: .2s;}
-.stat-box:hover{background:rgba(255,255,255,0.04); transform: translateY(-2px);}
 .stat-val{font-size:20px;font-weight:800;}
 .stat-lbl{font-size:10px;color:rgba(255,255,255,0.4);margin-top:4px;font-weight:600; text-transform: uppercase;}
 
 .ui-section{font-size:11px;font-weight:800;letter-spacing:1.5px;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:10px; margin-top: 20px;}
 
 .list-item{background:rgba(255,255,255,0.02);border-radius:12px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;border:1px solid var(--border); transition: .2s;}
-.list-item:hover{border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.05);}
 .btn-primary{background:linear-gradient(135deg, #3b82f6, #2563eb);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:800;color:#fff;cursor:pointer; box-shadow: 0 4px 12px rgba(37,99,235,0.3); text-align: center; border: none;}
 .btn-ghost{background: transparent; border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:8px 16px;font-size:11px;font-weight:700;color:#fff;cursor:pointer; text-align: center;}
 
@@ -99,23 +98,58 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 .bar-label{display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:6px;}
 .bar-track{height:8px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);}
 .bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#3b82f6,#60a5fa); box-shadow: 0 0 10px rgba(59,130,246,0.5);}
-.bar-fill.red{background:linear-gradient(90deg,#dc2626,#ef4444); box-shadow: 0 0 10px rgba(239,68,68,0.5);}
-.bar-fill.amber{background:linear-gradient(90deg,#d97706,#f59e0b); box-shadow: 0 0 10px rgba(245,158,11,0.5);}
+.bar-fill.red{background:linear-gradient(90deg,#dc2626,#ef4444);}
+.bar-fill.amber{background:linear-gradient(90deg,#d97706,#f59e0b);}
 
 .badge{padding:4px 8px; border-radius:6px; font-size:10px; font-weight:700;}
 .badge.red{background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3);}
 .badge.amber{background:rgba(245,158,11,0.15); color:#fbbf24; border:1px solid rgba(245,158,11,0.3);}
 .badge.green{background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);}
+.badge.blue{background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3);}
 
 /* CARDS FOR GRID */
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
 .card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:24px;transition:.3s; backdrop-filter: blur(10px);}
-.card:hover{background:rgba(255,255,255,0.08);border-color:var(--blue2); transform: translateY(-4px);}
 .card .h3{font-size:16px;font-weight:700;margin-bottom:8px;}
 .card .sub2{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;}
 
 /* FOOTER */
 .slide-footer{position:fixed;bottom:0;left:0;right:0;height:40px;background:rgba(10, 17, 24, 0.9);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;font-size:11px;font-weight: 500; color:rgba(255,255,255,0.3);z-index:99;}
+
+/* DESKTOP LAYOUT HELPER FOR NEW SLIDES */
+.desktop-split-mock { display:grid; grid-template-columns: 1fr 1.5fr; gap: 20px; }
+
+/* 📱 MOBILE RESPONSIVENESS */
+@media (max-width: 900px) {
+  #nav { padding: 0 20px; }
+  .nav-center, .brand-url, .slide-dots { display: none; }
+  
+  .slide-inner { padding: 20px 24px 80px 24px; }
+  .split { grid-template-columns: 1fr; gap: 40px; align-items: start; }
+  
+  .h1 { font-size: 40px; letter-spacing: -1px; }
+  .h2 { font-size: 30px; }
+  .sub { font-size: 14px; margin-bottom: 20px; }
+  
+  .g3 { grid-template-columns: 1fr; gap: 16px; }
+  
+  /* Mockups adjustments */
+  .device-bezel { height: auto; min-height: 450px; margin-top: 10px; }
+  .device-bezel.desktop { height: auto; min-height: 500px; }
+  .desktop-split-mock { grid-template-columns: 1fr; gap: 12px; }
+  .desktop .device-camera { display: none; } /* Hide camera on mobile desktop-mode to save space */
+  
+  .stat-row-4 { grid-template-columns: 1fr 1fr; }
+  .stat-row-5 { grid-template-columns: 1fr 1fr; } /* Adjust specific large grids */
+  
+  /* Heatmap adjustment for National Authority */
+  .heatmap-grid { grid-template-columns: 1fr 1fr !important; }
+  
+  /* Table adjustments */
+  table th, table td { padding: 8px !important; font-size: 11px !important; }
+  
+  .slide-footer { padding: 0 20px; }
+}
 </style>
 </head>
 <body>
@@ -133,7 +167,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
   <div class="nav-center">Digital Learning Ecosystem</div>
   <div class="nav-right">
     <div class="slide-dots" id="dots"></div>
-    <button class="nbtn" onclick="prev()">Previous</button>
+    <button class="nbtn" onclick="prev()">Prev</button>
     <button class="nbtn" style="background:var(--blue); border-color:var(--blue);" onclick="next()">Next</button>
   </div>
 </div>
@@ -164,7 +198,6 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
       <div class="frow"><div class="frow-icon">📖</div><div><div class="frow-title">Structured Lesson Player</div><div class="frow-desc">Text, images, diagrams, and streamlined video lessons in one immersive view.</div></div></div>
       <div class="frow"><div class="frow-icon">🔌</div><div><div class="frow-title">Offline-First Learning</div><div class="frow-desc">Study in remote areas without internet. Work syncs automatically when reconnected.</div></div></div>
       <div class="frow"><div class="frow-icon">🗺️</div><div><div class="frow-title">Personalised Learning Path</div><div class="frow-desc">System dynamically adjusts difficulty based on mastery and progression.</div></div></div>
-      <div class="frow"><div class="frow-icon">📈</div><div><div class="frow-title">Progress & Mastery Tracking</div><div class="frow-desc">Students always see where they stand — by subject, topic and skill level.</div></div></div>
     </div>
     <div class="device-bezel">
       <div class="device-camera"></div>
@@ -180,20 +213,18 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           </div>
           <div class="stat-row stat-row-4">
             <div class="stat-box"><div class="stat-val" style="color:var(--blue3);">78%</div><div class="stat-lbl">Overall</div></div>
-            <div class="stat-box"><div class="stat-val">5</div><div class="stat-lbl">Due Today</div></div>
-            <div class="stat-box"><div class="stat-val" style="color:#fbbf24;">240</div><div class="stat-lbl">Points</div></div>
+            <div class="stat-box"><div class="stat-val">5</div><div class="stat-lbl">Due</div></div>
+            <div class="stat-box"><div class="stat-val" style="color:#fbbf24;">240</div><div class="stat-lbl">Pts</div></div>
             <div class="stat-box"><div class="stat-val">3</div><div class="stat-lbl">Badges</div></div>
           </div>
-          <div class="ui-section">Today's Lessons</div>
+          <div class="ui-section" style="margin-top:0;">Today's Lessons</div>
           <div class="list-item">
             <div style="font-size: 24px;">📐</div>
             <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Mathematics – Algebra Basics</div><div style="font-size:11px;color:rgba(255,255,255,0.4);">Video + Quiz · 25 min</div></div>
-            <button class="btn-primary">Start</button>
           </div>
           <div class="list-item">
             <div style="font-size: 24px;">🔬</div>
             <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Basic Science – Photosynthesis</div><div style="font-size:11px;color:rgba(255,255,255,0.4);">Reading + MCQ · 20 min</div></div>
-            <button class="btn-ghost">Next</button>
           </div>
           <div class="ui-section">Topic Mastery</div>
           <div class="bar-row"><div class="bar-label"><span>Mathematics</span><span>72%</span></div><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div></div>
@@ -212,25 +243,17 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
       <div class="sub">Eight question types keep learning engaging. Secure exam mode locks the tablet during tests — no distractions, no cheating.</div>
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
         <div class="stat-box" style="text-align:left; padding:16px;">
-          <div style="font-size:14px;font-weight:700;margin-bottom:6px;">☑️ MCQ & True/False</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px;">☑️ MCQ & T/F</div>
           <div style="font-size:12px;color:rgba(255,255,255,0.5);">Auto-graded instantly</div>
         </div>
         <div class="stat-box" style="text-align:left; padding:16px;">
           <div style="font-size:14px;font-weight:700;margin-bottom:6px;">✍️ Short Answer</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.5);">AI-scored against rubric</div>
-        </div>
-        <div class="stat-box" style="text-align:left; padding:16px;">
-          <div style="font-size:14px;font-weight:700;margin-bottom:6px;">🖼️ Image-Based</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.5);">Visual question support</div>
-        </div>
-        <div class="stat-box" style="text-align:left; padding:16px;">
-          <div style="font-size:14px;font-weight:700;margin-bottom:6px;">🔗 Matching</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.5);">Drag-and-drop UI</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.5);">AI-scored vs rubric</div>
         </div>
       </div>
       <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:16px;">
         <div style="font-size:14px;font-weight:800;color:#f87171;margin-bottom:6px;">🔒 Exam Lock Mode</div>
-        <div style="font-size:12.5px;color:rgba(255,255,255,0.6);line-height:1.5;">During exams, the tablet is locked. No other apps can open. Answers auto-save every few seconds — no student loses work if connectivity drops.</div>
+        <div style="font-size:12.5px;color:rgba(255,255,255,0.6);line-height:1.5;">During exams, the tablet is locked. No other apps can open. Answers auto-save to prevent data loss.</div>
       </div>
     </div>
     <div class="device-bezel">
@@ -251,7 +274,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
             <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.7);"><span style="background:rgba(255,255,255,0.1);width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;">B</span>8</div>
             <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.7);"><span style="background:rgba(255,255,255,0.1);width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;">C</span>22</div>
           </div>
-          <div style="display:flex;gap:12px;margin-bottom:20px;">
+          <div style="display:flex;gap:12px;">
             <button class="btn-ghost" style="flex:1;">← Prev</button>
             <button class="btn-primary" style="flex:1;">Next →</button>
           </div>
@@ -267,31 +290,28 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
       <div class="tag">Student Portal · 03</div>
       <div class="h2">Earning Rewards<br/><em>for Learning</em></div>
       <div class="sub">Students earn points for every lesson, quiz, and attendance day. Points are redeemed for real items — books, stationery, food vouchers, and more.</div>
-      <div class="frow"><div class="frow-icon">🔥</div><div><div class="frow-title">Daily Streaks</div><div class="frow-desc">Consecutive login days build streaks. Bonus points are awarded for consistency.</div></div></div>
-      <div class="frow"><div class="frow-icon">🏅</div><div><div class="frow-title">Achievement Badges</div><div class="frow-desc">Milestone badges auto-awarded — First Perfect Score, Top of Class, Bookworm, etc.</div></div></div>
-      <div class="frow"><div class="frow-icon">⚡</div><div><div class="frow-title">10× First-Attempt Bonus</div><div class="frow-desc">Passing on the first try yields a 10x multiplier, encouraging genuine effort.</div></div></div>
-      <div class="frow"><div class="frow-icon">🎁</div><div><div class="frow-title">Redemption Catalog</div><div class="frow-desc">Admin-managed catalog of age-appropriate rewards redeemable in-app.</div></div></div>
+      <div class="frow"><div class="frow-icon">🔥</div><div><div class="frow-title">Daily Streaks</div><div class="frow-desc">Consecutive login days build streaks to encourage habit building.</div></div></div>
+      <div class="frow"><div class="frow-icon">🏅</div><div><div class="frow-title">Achievement Badges</div><div class="frow-desc">Milestone badges auto-awarded (e.g. Perfect Score, Bookworm).</div></div></div>
+      <div class="frow"><div class="frow-icon">⚡</div><div><div class="frow-title">10× First-Attempt Bonus</div><div class="frow-desc">Passing on the first try yields a massive multiplier to stop guessing.</div></div></div>
     </div>
     <div class="device-bezel">
       <div class="device-camera"></div>
       <div class="mock">
-        <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title">Student Portal · Rewards</div></div>
+        <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title">Rewards Catalog</div></div>
         <div class="mock-body">
           <div style="background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(245,158,11,0.05));border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:24px;margin-bottom:20px;text-align:center;">
             <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:800;margin-bottom:8px; letter-spacing:1px;">POINTS BALANCE</div>
             <div style="font-size:48px;font-weight:800;color:#fbbf24; text-shadow: 0 4px 12px rgba(245,158,11,0.4);">1,240</div>
-            <div style="font-size:12px;color:rgba(255,255,255,0.6); margin-top: 8px;">+120 this week · 🔥 12-day streak</div>
           </div>
           <div class="ui-section">Badges Earned</div>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;">
-            <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:10px 16px;text-align:center;font-size:11px;color:rgba(255,255,255,0.8);"><span style="font-size:20px;display:block;margin-bottom:4px;">🌟</span>Perfect Score</div>
-            <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:10px 16px;text-align:center;font-size:11px;color:rgba(255,255,255,0.8);"><span style="font-size:20px;display:block;margin-bottom:4px;">📚</span>Bookworm</div>
-            <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:10px 16px;text-align:center;font-size:11px;color:rgba(255,255,255,0.3);"><span style="font-size:20px;display:block;margin-bottom:4px; filter: grayscale(1);">🏆</span>Top of Class</div>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:20px;">
+            <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;font-size:11px;color:rgba(255,255,255,0.8);"><span style="font-size:20px;display:block;margin-bottom:4px;">🌟</span>Perfect Score</div>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center;font-size:11px;color:rgba(255,255,255,0.8);"><span style="font-size:20px;display:block;margin-bottom:4px;">📚</span>Bookworm</div>
           </div>
           <div class="ui-section">Redeem Rewards</div>
           <div class="list-item">
             <div style="font-size: 20px;">📚</div>
-            <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Nigerian History Book</div><div style="font-size:11px;color:rgba(255,255,255,0.4);">200 pts</div></div>
+            <div style="flex:1;"><div style="font-size:13px;font-weight:700;">History Book</div><div style="font-size:11px;color:rgba(255,255,255,0.4);">200 pts</div></div>
             <button class="btn-primary">Redeem</button>
           </div>
           <div class="list-item">
@@ -310,11 +330,9 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
     <div>
       <div class="tag">Student Portal · 04</div>
       <div class="h2">Monitoring<br/><em>Student Wellbeing</em></div>
-      <div class="sub">Beyond grades — DLE monitors how students feel. Mood surveys, cognitive load indicators, and optional video sentiment capture give teachers a full picture.</div>
+      <div class="sub">Beyond grades, DLE monitors how students feel. Mood surveys and cognitive load indicators give teachers a full picture of student health.</div>
       <div class="frow"><div class="frow-icon">😊</div><div><div class="frow-title">Mood Surveys</div><div class="frow-desc">Short daily check-ins. Teachers see aggregated trends to spot silent struggles.</div></div></div>
       <div class="frow"><div class="frow-icon">🧠</div><div><div class="frow-title">Cognitive Load Survey</div><div class="frow-desc">Students rate how hard they found a lesson, helping identify poorly optimized content.</div></div></div>
-      <div class="frow"><div class="frow-icon">🎥</div><div><div class="frow-title">Video Sentiment Capture</div><div class="frow-desc">Optional AI emotion detection with strict privacy controls and parental consent.</div></div></div>
-      <div class="frow"><div class="frow-icon">📋</div><div><div class="frow-title">Experience Feedback</div><div class="frow-desc">Structured feedback loops — students tell the system what works and what doesn't.</div></div></div>
     </div>
     <div class="device-bezel">
       <div class="device-camera"></div>
@@ -323,10 +341,10 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
         <div class="mock-body" style="display:flex; flex-direction:column; justify-content:center;">
           <div style="text-align:center;margin-bottom:24px;">
             <div style="font-size:16px;font-weight:800;margin-bottom:6px;">How are you feeling today?</div>
-            <div style="font-size:12px;color:rgba(255,255,255,0.4);">This helps your teacher support you better</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.4);">This helps your teacher support you</div>
           </div>
           <div style="display:flex;justify-content:space-between;margin-bottom:30px; gap: 8px;">
-            <div style="flex:1;text-align:center;cursor:pointer;padding:16px 8px;border-radius:12px;border:2px solid var(--blue);background:rgba(37,99,235,0.15); box-shadow: 0 4px 12px rgba(37,99,235,0.2);">
+            <div style="flex:1;text-align:center;cursor:pointer;padding:16px 8px;border-radius:12px;border:2px solid var(--blue);background:rgba(37,99,235,0.15);">
               <div style="font-size:36px;">😊</div><div style="font-size:11px;color:var(--blue3);margin-top:8px;font-weight:700;">Happy</div>
             </div>
             <div style="flex:1;text-align:center;cursor:pointer;padding:16px 8px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.02);">
@@ -340,9 +358,9 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
             <div style="font-size:13px;font-weight:700;">How hard was today's lesson?</div>
           </div>
           <div style="display:flex;gap:6px;margin-bottom:8px;">
-            <div style="flex:1;height:12px;background:var(--blue);border-radius:6px; box-shadow: 0 0 10px rgba(37,99,235,0.5);"></div>
-            <div style="flex:1;height:12px;background:var(--blue);border-radius:6px; box-shadow: 0 0 10px rgba(37,99,235,0.5);"></div>
-            <div style="flex:1;height:12px;background:var(--blue);border-radius:6px; box-shadow: 0 0 10px rgba(37,99,235,0.5);"></div>
+            <div style="flex:1;height:12px;background:var(--blue);border-radius:6px;"></div>
+            <div style="flex:1;height:12px;background:var(--blue);border-radius:6px;"></div>
+            <div style="flex:1;height:12px;background:var(--blue);border-radius:6px;"></div>
             <div style="flex:1;height:12px;background:rgba(255,255,255,0.1);border-radius:6px;"></div>
             <div style="flex:1;height:12px;background:rgba(255,255,255,0.1);border-radius:6px;"></div>
           </div>
@@ -357,13 +375,51 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 <div class="slide">
   <div class="slide-inner split">
     <div>
+      <div class="tag">Wellbeing & Privacy · Module P</div>
+      <div class="h2">Video-Based<br/><em>Sentiment Analysis</em></div>
+      <div class="sub">Advanced emotional tracking using short video responses. Integrated directly with the tablet's camera to capture cognitive load and engagement, backed by strict consent management.</div>
+      <div class="frow"><div class="frow-icon">🎥</div><div><div class="frow-title">Secure Video Capture</div><div class="frow-desc">Students record brief reflections on their learning experience directly in the app.</div></div></div>
+      <div class="frow"><div class="frow-icon">🧠</div><div><div class="frow-title">AI Emotion Detection</div><div class="frow-desc">Backend sentiment analysis translates facial cues into emotional trend reporting.</div></div></div>
+      <div class="frow"><div class="frow-icon">🔒</div><div><div class="frow-title">Strict Privacy Controls</div><div class="frow-desc">Parental consent required. Data is highly restricted, encrypted, and audit-logged.</div></div></div>
+    </div>
+    <div class="device-bezel">
+      <div class="device-camera"></div>
+      <div class="mock">
+        <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title">Video Check-in</div></div>
+        <div class="mock-body" style="display:flex; flex-direction:column;">
+          <div style="text-align:center;margin-bottom:16px;">
+            <div style="font-size:14px;font-weight:800;margin-bottom:4px;">Weekly Reflection</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.4);">"What was the hardest part of math this week?"</div>
+          </div>
+          <div style="flex:1; background:#000; border-radius:12px; border:1px solid var(--border); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; margin-bottom:16px; min-height: 200px;">
+            <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(37,99,235,0.1), rgba(0,0,0,0.8));"></div>
+            <div style="font-size:48px; opacity:0.2;">👤</div>
+            <div style="position:absolute; top:12px; right:12px; background:rgba(239,68,68,0.2); border:1px solid #ef4444; color:#f87171; font-size:9px; font-weight:800; padding:4px 8px; border-radius:4px; display:flex; align-items:center; gap:4px;">
+              <div style="width:6px; height:6px; background:#ef4444; border-radius:50%;"></div> REC 00:14
+            </div>
+          </div>
+          <div style="display:flex; justify-content:center; margin-bottom:16px;">
+            <div style="width:48px; height:48px; background:var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; border:4px solid rgba(255,255,255,0.1); cursor:pointer;">
+               <div style="width:16px; height:16px; background:#fff; border-radius:2px;"></div>
+            </div>
+          </div>
+          <div style="text-align:center; font-size:9px; color:rgba(255,255,255,0.3);">
+            🔒 Video data is encrypted and only shared with your teacher.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-inner split">
+    <div>
       <div class="tag">Teacher Portal · 05</div>
       <div class="h2">Less Marking,<br/><em>More Mentoring</em></div>
       <div class="sub">The system grades all objective work. AI scores written answers with a confidence rating. Teachers review, approve, and add feedback — in minutes, not hours.</div>
-      <div class="frow"><div class="frow-icon">🤖</div><div><div class="frow-title">AI-Assisted Grading</div><div class="frow-desc">Instant MCQ grading. AI scores written responses with confidence ratings for teacher approval.</div></div></div>
-      <div class="frow"><div class="frow-icon">🚨</div><div><div class="frow-title">At-Risk Student Alerts</div><div class="frow-desc">Flags students falling behind or frequently absent, allowing for early intervention.</div></div></div>
-      <div class="frow"><div class="frow-icon">💬</div><div><div class="frow-title">Bulk Feedback Tools</div><div class="frow-desc">Send encouragement to individual students or the whole class in seconds.</div></div></div>
-      <div class="frow"><div class="frow-icon">📊</div><div><div class="frow-title">Engagement Trends</div><div class="frow-desc">Correlate attendance with academic performance visually.</div></div></div>
+      <div class="frow"><div class="frow-icon">🤖</div><div><div class="frow-title">AI-Assisted Grading</div><div class="frow-desc">Instant MCQ grading. AI scores written responses with confidence ratings.</div></div></div>
+      <div class="frow"><div class="frow-icon">🚨</div><div><div class="frow-title">At-Risk Alerts</div><div class="frow-desc">Flags students falling behind or frequently absent for early intervention.</div></div></div>
     </div>
     <div class="device-bezel">
       <div class="device-camera"></div>
@@ -373,29 +429,23 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <div class="ui-topbar">
             <div><div class="ui-greeting">JSS 2 Science Overview</div><div class="ui-subtext">Mr. Adebayo · Term 2</div></div>
           </div>
-          <div class="stat-row" style="grid-template-columns: 1fr 1fr 1fr;">
+          <div class="stat-row stat-row-3">
             <div class="stat-box"><div class="stat-val">34</div><div class="stat-lbl">Students</div></div>
-            <div class="stat-box"><div class="stat-val" style="color:var(--blue3);">71%</div><div class="stat-lbl">Class Avg</div></div>
+            <div class="stat-box"><div class="stat-val" style="color:var(--blue3);">71%</div><div class="stat-lbl">Avg</div></div>
             <div class="stat-box" style="border-color:rgba(239,68,68,0.4); background: rgba(239,68,68,0.05);"><div class="stat-val" style="color:#ef4444;">4</div><div class="stat-lbl">At Risk</div></div>
           </div>
-          <div class="ui-section">⚠️ Students Needing Attention</div>
+          <div class="ui-section" style="margin-top:0;">⚠️ Students Needing Attention</div>
           <div class="list-item" style="border-left: 3px solid #ef4444;">
             <div class="ui-avatar" style="background: #333;">A</div>
-            <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Amaka O.</div><div style="font-size:11px;color:#ef4444;">High Risk · Score: 38% · Att: 61%</div></div>
-            <button class="btn-ghost" style="border-color: #ef4444; color: #ef4444;">View</button>
-          </div>
-          <div class="list-item" style="border-left: 3px solid #f59e0b;">
-            <div class="ui-avatar" style="background: #333;">E</div>
-            <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Emeka D.</div><div style="font-size:11px;color:#f59e0b;">Watchlist · Score: 45% · Att: 74%</div></div>
-            <button class="btn-ghost">View</button>
+            <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Amaka O.</div><div style="font-size:11px;color:#ef4444;">Score: 38% · Att: 61%</div></div>
           </div>
           <div class="ui-section">Pending AI Grade Review</div>
           <div class="stat-box" style="text-align: left;">
              <div style="display:flex; justify-content: space-between; margin-bottom: 8px;">
-               <strong style="font-size: 12px;">Chidi – Science Short Answer</strong>
+               <strong style="font-size: 12px;">Chidi – Short Answer</strong>
                <span class="badge amber">AI Score: 7/10</span>
              </div>
-             <p style="font-size: 11px; color: rgba(255,255,255,0.5); font-style: italic; margin-bottom: 12px;">"Photosynthesis converts sunlight into glucose using chlorophyll in plant cells..."</p>
+             <p style="font-size: 11px; color: rgba(255,255,255,0.5); font-style: italic; margin-bottom: 12px;">"Photosynthesis converts sunlight into glucose..."</p>
              <div style="display:flex; gap: 8px;">
                <button class="btn-primary" style="flex:1;">✓ Approve</button>
                <button class="btn-ghost" style="flex:1;">Override</button>
@@ -412,11 +462,10 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
     <div>
       <div class="tag">Parent Portal · 06</div>
       <div class="h2">Parents Always<br/><em>Informed</em></div>
-      <div class="sub">A simple mobile-friendly view giving parents real-time visibility of their child's academic progress, attendance, and wellbeing — with zero technical knowledge required.</div>
-      <div class="frow"><div class="frow-icon">📊</div><div><div class="frow-title">Academic Progress Dashboard</div><div class="frow-desc">Subject grades, mastery, and comparison to class average in real-time.</div></div></div>
-      <div class="frow"><div class="frow-icon">📅</div><div><div class="frow-title">Attendance Calendar</div><div class="frow-desc">Instant mobile notification when a child is absent from school.</div></div></div>
-      <div class="frow"><div class="frow-icon">🔔</div><div><div class="frow-title">Risk & Performance Alerts</div><div class="frow-desc">Automatic alerts if scores drop sharply or a teacher flags a concern.</div></div></div>
-      <div class="frow"><div class="frow-icon">👨‍👩‍👧‍👦</div><div><div class="frow-title">Multiple Children Hub</div><div class="frow-desc">Track all children across different schools and grades from one account.</div></div></div>
+      <div class="sub">A simple mobile-friendly view giving parents real-time visibility of their child's academic progress, attendance, and wellbeing.</div>
+      <div class="frow"><div class="frow-icon">📊</div><div><div class="frow-title">Progress Dashboard</div><div class="frow-desc">Subject grades and mastery in real-time.</div></div></div>
+      <div class="frow"><div class="frow-icon">📅</div><div><div class="frow-title">Attendance & Alerts</div><div class="frow-desc">Instant mobile notifications for absences or risk flags.</div></div></div>
+      <div class="frow"><div class="frow-icon">👨‍👩‍👧‍👦</div><div><div class="frow-title">Multiple Children Hub</div><div class="frow-desc">Track all children from one account.</div></div></div>
     </div>
     <div class="device-bezel">
       <div class="device-camera"></div>
@@ -433,18 +482,17 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
             <div class="stat-box"><div class="stat-val">😊</div><div class="stat-lbl">Mood</div></div>
             <div class="stat-box"><div class="stat-val" style="color:var(--amber);">12</div><div class="stat-lbl">Streak</div></div>
           </div>
-          <div class="ui-section">Subject Performance vs Class</div>
-          <div class="bar-row"><div class="bar-label"><span>Mathematics</span><span>78% · Avg 65%</span></div><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div></div>
-          <div class="bar-row"><div class="bar-label"><span>English Language</span><span>85% · Avg 71%</span></div><div class="bar-track"><div class="bar-fill" style="width:85%"></div></div></div>
-          <div class="bar-row"><div class="bar-label"><span style="color:#f87171;">Basic Science ⚠️</span><span>61% · Avg 68%</span></div><div class="bar-track"><div class="bar-fill red" style="width:61%"></div></div></div>
+          <div class="ui-section" style="margin-top:0;">Subject Performance</div>
+          <div class="bar-row"><div class="bar-label"><span>Mathematics</span><span>78%</span></div><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div></div>
+          <div class="bar-row"><div class="bar-label"><span style="color:#f87171;">Basic Science ⚠️</span><span>61%</span></div><div class="bar-track"><div class="bar-fill red" style="width:61%"></div></div></div>
           <div class="ui-section">Recent Alerts</div>
           <div class="list-item" style="border-left: 3px solid var(--green);">
             <div style="font-size:16px;">✓</div>
-            <div style="flex:1;"><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);">Mathematics assignment completed</div><div style="font-size:10px;color:rgba(255,255,255,0.4); margin-top:2px;">Today, 2:15 PM</div></div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);">Math assignment completed</div></div>
           </div>
           <div class="list-item" style="border-left: 3px solid var(--amber);">
             <div style="font-size:16px;">⚠️</div>
-            <div style="flex:1;"><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);">Science score dropped 12%</div><div style="font-size:10px;color:rgba(255,255,255,0.4); margin-top:2px;">Yesterday, 4:00 PM</div></div>
+            <div style="flex:1;"><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.8);">Science score dropped 12%</div></div>
           </div>
         </div>
       </div>
@@ -457,11 +505,9 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
     <div>
       <div class="tag">School Administration · 07</div>
       <div class="h2">Digital School<br/><em>Management</em></div>
-      <div class="sub">School principals manage the entire institution digitally — enrolment, teacher assignment, performance monitoring, dropout prevention, and device tracking.</div>
-      <div class="frow"><div class="frow-icon">🏫</div><div><div class="frow-title">School Structure Setup</div><div class="frow-desc">Configure grades, classes, subjects, and timetables in one place.</div></div></div>
-      <div class="frow"><div class="frow-icon">👩‍🏫</div><div><div class="frow-title">Teacher & Enrolment Management</div><div class="frow-desc">Assign teachers to classes, enrol or transfer students effortlessly.</div></div></div>
+      <div class="sub">School principals manage the entire institution digitally — enrolment, teacher assignment, performance monitoring, and device tracking.</div>
+      <div class="frow"><div class="frow-icon">🏫</div><div><div class="frow-title">School Structure Setup</div><div class="frow-desc">Configure grades, classes, and subjects in one place.</div></div></div>
       <div class="frow"><div class="frow-icon">📉</div><div><div class="frow-title">Dropout Risk Monitoring</div><div class="frow-desc">See which students are at risk of leaving school before it happens.</div></div></div>
-      <div class="frow"><div class="frow-icon">📱</div><div><div class="frow-title">Device & Usage Monitoring</div><div class="frow-desc">See which tablets are offline or malfunctioning automatically.</div></div></div>
     </div>
     <div class="device-bezel">
       <div class="device-camera"></div>
@@ -471,24 +517,18 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <div style="font-size:14px;font-weight:800;margin-bottom:16px; letter-spacing: -0.5px;">Govt. Secondary School, Ikeja</div>
           <div class="stat-row stat-row-4">
             <div class="stat-box"><div class="stat-val">842</div><div class="stat-lbl">Students</div></div>
-            <div class="stat-box"><div class="stat-val" style="color:var(--blue3);">74%</div><div class="stat-lbl">Avg Score</div></div>
+            <div class="stat-box"><div class="stat-val" style="color:var(--blue3);">74%</div><div class="stat-lbl">Avg</div></div>
             <div class="stat-box" style="border-color:rgba(239,68,68,0.4); background:rgba(239,68,68,0.05);"><div class="stat-val" style="color:#ef4444;">23</div><div class="stat-lbl">At Risk</div></div>
             <div class="stat-box"><div class="stat-val" style="color:var(--green);">91%</div><div class="stat-lbl">Attnd.</div></div>
           </div>
-          <div class="ui-section">Performance by Grade</div>
+          <div class="ui-section" style="margin-top:0;">Performance by Grade</div>
           <div class="bar-row"><div class="bar-label"><span>JSS 1</span><span>81%</span></div><div class="bar-track"><div class="bar-fill" style="width:81%"></div></div></div>
           <div class="bar-row"><div class="bar-label"><span>JSS 2</span><span>74%</span></div><div class="bar-track"><div class="bar-fill" style="width:74%"></div></div></div>
           <div class="bar-row"><div class="bar-label"><span>JSS 3</span><span>68%</span></div><div class="bar-track"><div class="bar-fill amber" style="width:68%"></div></div></div>
-          <div class="ui-section">High-Risk Interventions Required</div>
+          <div class="ui-section">High-Risk Interventions</div>
           <div class="list-item">
             <div class="ui-avatar" style="background:#333;">A</div>
             <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Amaka O. (JSS 2)</div><span class="badge red" style="display:inline-block; margin-top:4px;">Dropout Risk</span></div>
-            <button class="btn-ghost">Action</button>
-          </div>
-          <div class="list-item">
-            <div class="ui-avatar" style="background:#333;">E</div>
-            <div style="flex:1;"><div style="font-size:13px;font-weight:700;">Emeka D. (JSS 3)</div><span class="badge amber" style="display:inline-block; margin-top:4px;">Low Engagement</span></div>
-            <button class="btn-ghost">Action</button>
           </div>
         </div>
       </div>
@@ -506,41 +546,34 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
       <div class="device-camera"></div>
       <div class="mock">
         <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title" style="text-transform:none;">National Intelligence Dashboard · Ministry of Education</div></div>
-        <div class="mock-body" style="display:grid; grid-template-columns: 1fr 280px; gap: 24px;">
+        <div class="mock-body desktop-split-mock">
           <div>
-            <div class="stat-row" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="stat-row stat-row-5" style="grid-template-columns: repeat(4, 1fr);">
               <div class="stat-box"><div class="stat-val">2.4M</div><div class="stat-lbl">Students Active</div></div>
               <div class="stat-box"><div class="stat-val" style="color:var(--blue3);">68%</div><div class="stat-lbl">National Avg</div></div>
               <div class="stat-box"><div class="stat-val" style="color:var(--green);">94%</div><div class="stat-lbl">Daily Attendance</div></div>
               <div class="stat-box" style="border-color:rgba(239,68,68,0.4); background:rgba(239,68,68,0.05);"><div class="stat-val" style="color:#ef4444;">8,240</div><div class="stat-lbl">Critical Risk</div></div>
             </div>
-            <div class="ui-section">Regional Performance Heatmap</div>
-            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+            <div class="ui-section" style="margin-top:0;">Regional Performance Heatmap</div>
+            <div class="heatmap-grid" style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
               <div style="background:rgba(16,185,129,0.3); border: 1px solid rgba(16,185,129,0.5); padding: 12px; border-radius: 8px; text-align:center;"><div style="font-size:14px; font-weight:800;">Lagos</div><div style="font-size:11px; color:rgba(255,255,255,0.7);">81%</div></div>
               <div style="background:rgba(16,185,129,0.2); border: 1px solid rgba(16,185,129,0.4); padding: 12px; border-radius: 8px; text-align:center;"><div style="font-size:14px; font-weight:800;">Abuja</div><div style="font-size:11px; color:rgba(255,255,255,0.7);">78%</div></div>
               <div style="background:rgba(16,185,129,0.2); border: 1px solid rgba(16,185,129,0.4); padding: 12px; border-radius: 8px; text-align:center;"><div style="font-size:14px; font-weight:800;">Rivers</div><div style="font-size:11px; color:rgba(255,255,255,0.7);">77%</div></div>
               <div style="background:rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); padding: 12px; border-radius: 8px; text-align:center;"><div style="font-size:14px; font-weight:800;">Delta</div><div style="font-size:11px; color:rgba(255,255,255,0.7);">67%</div></div>
               <div style="background:rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); padding: 12px; border-radius: 8px; text-align:center;"><div style="font-size:14px; font-weight:800;">Oyo</div><div style="font-size:11px; color:rgba(255,255,255,0.7);">65%</div></div>
-              <div style="background:rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); padding: 12px; border-radius: 8px; text-align:center;"><div style="font-size:14px; font-weight:800;">Enugu</div><div style="font-size:11px; color:rgba(255,255,255,0.7);">63%</div></div>
               <div style="background:rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.4); padding: 12px; border-radius: 8px; text-align:center;"><div style="font-size:14px; font-weight:800;">Kano</div><div style="font-size:11px; color:rgba(255,255,255,0.7);">52%</div></div>
-              <div style="background:rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.4); padding: 12px; border-radius: 8px; text-align:center;"><div style="font-size:14px; font-weight:800;">Borno</div><div style="font-size:11px; color:rgba(255,255,255,0.7);">48%</div></div>
             </div>
           </div>
           <div>
             <div class="stat-box" style="text-align:left; margin-bottom: 12px;">
-              <div style="font-size:16px; margin-bottom: 8px;">🗺️</div>
-              <div style="font-size:13px; font-weight:700; margin-bottom: 4px;">Dropout Risk Heatmaps</div>
+              <div style="font-size:16px; margin-bottom: 4px;">🗺️</div>
+              <div style="font-size:13px; font-weight:700; margin-bottom: 2px;">Dropout Risk Heatmaps</div>
               <div style="font-size:11px; color:rgba(255,255,255,0.5);">Visualise high-risk districts to direct funding accurately.</div>
             </div>
             <div class="stat-box" style="text-align:left; margin-bottom: 12px;">
-              <div style="font-size:16px; margin-bottom: 8px;">📐</div>
-              <div style="font-size:13px; font-weight:700; margin-bottom: 4px;">Foundational Skills</div>
+              <div style="font-size:16px; margin-bottom: 4px;">📐</div>
+              <div style="font-size:13px; font-weight:700; margin-bottom: 2px;">Foundational Skills</div>
               <div style="font-size:11px; color:rgba(255,255,255,0.5);">Track national literacy and numeracy term by term.</div>
-            </div>
-            <div class="stat-box" style="text-align:left;">
-              <div style="font-size:16px; margin-bottom: 8px;">📤</div>
-              <div style="font-size:13px; font-weight:700; margin-bottom: 4px;">Exportable Reports</div>
-              <div style="font-size:11px; color:rgba(255,255,255,0.5);">Download reports ready for ministry presentations.</div>
             </div>
           </div>
         </div>
@@ -554,36 +587,131 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
     <div class="tag">Platform Intelligence · 09</div>
     <div class="h2">AI Working<br/><em>Silently in the Background</em></div>
     <div class="sub">Teachers and students never fight with technology. Six core AI engines run invisibly to grade, predict, recommend, and adapt the learning experience in real-time.</div>
-    <div class="g3" style="margin-top: 40px;">
+    <div class="g3" style="margin-top: 20px;">
       <div class="card">
-        <div style="font-size:32px;margin-bottom:16px;">📝</div>
+        <div style="font-size:32px;margin-bottom:12px;">📝</div>
         <div class="h3">Content Generation</div>
         <div class="sub2">Upload curriculum once. AI automatically produces structured lessons, quizzes, and teaching aids.</div>
       </div>
       <div class="card">
-        <div style="font-size:32px;margin-bottom:16px;">✅</div>
+        <div style="font-size:32px;margin-bottom:12px;">✅</div>
         <div class="h3">Automated Grading</div>
         <div class="sub2">Objective questions graded instantly. Written answers scored against a rubric with confidence indicators.</div>
       </div>
       <div class="card">
-        <div style="font-size:32px;margin-bottom:16px;">🔮</div>
+        <div style="font-size:32px;margin-bottom:12px;">🔮</div>
         <div class="h3">Dropout Prediction</div>
         <div class="sub2">Multi-factor ML models monitor engagement and mood to predict risk weeks before a student drops out.</div>
       </div>
       <div class="card">
-        <div style="font-size:32px;margin-bottom:16px;">🧭</div>
+        <div style="font-size:32px;margin-bottom:12px;">🧭</div>
         <div class="h3">Adaptive Learning</div>
         <div class="sub2">Difficulty is adjusted automatically. Struggling students receive remedial modules before moving on.</div>
       </div>
       <div class="card">
-        <div style="font-size:32px;margin-bottom:16px;">🕵️</div>
+        <div style="font-size:32px;margin-bottom:12px;">🕵️</div>
         <div class="h3">Anomaly Detection</div>
         <div class="sub2">Analyses answer timing and sequences to detect guessing or suspicious behaviour during assessments.</div>
       </div>
       <div class="card">
-        <div style="font-size:32px;margin-bottom:16px;">😊</div>
+        <div style="font-size:32px;margin-bottom:12px;">😊</div>
         <div class="h3">Emotional Intelligence</div>
         <div class="sub2">Video-based mood surveys with AI sentiment detection alert teachers to emotional state changes.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-inner split">
+    <div>
+      <div class="tag">AI Content Generation · Modules B & C</div>
+      <div class="h2">From Paper to<br/><em>Digital in Seconds</em></div>
+      <div class="sub">Our automation-first academic model ingests standard PDF curriculums and uses generative AI to instantly structure content, build practice questions, and generate teacher lesson plans.</div>
+      <div class="frow"><div class="frow-icon">📄</div><div><div class="frow-title">Automated Ingestion</div><div class="frow-desc">Upload raw syllabus documents. The system decomposes them into Grade → Subject → Topic structure.</div></div></div>
+      <div class="frow"><div class="frow-icon">⚙️</div><div><div class="frow-title">Material Generation</div><div class="frow-desc">AI generates topic summaries, difficulty variants, and reinforcement exercises automatically.</div></div></div>
+    </div>
+    <div class="device-bezel desktop">
+      <div class="device-camera"></div>
+      <div class="mock">
+        <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title" style="text-transform:none;">AI Content Studio · Admin Portal</div></div>
+        <div class="mock-body desktop-split-mock">
+          <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:12px; padding:16px;">
+            <div style="font-size:12px; font-weight:800; margin-bottom:12px; color:var(--blue3);">1. Source Upload</div>
+            <div style="border:2px dashed rgba(255,255,255,0.2); border-radius:8px; padding:20px; text-align:center; margin-bottom:16px;">
+              <div style="font-size:24px; margin-bottom:8px;">📄</div>
+              <div style="font-size:11px; font-weight:700;">JSS2_Science.pdf</div>
+              <div style="font-size:9px; color:rgba(255,255,255,0.4); margin-top:4px;">Uploaded 2 mins ago</div>
+            </div>
+            <div class="btn-ghost" style="width:100%; border-color:var(--blue); color:var(--blue3);">Processing via AI...</div>
+          </div>
+          <div>
+            <div style="font-size:12px; font-weight:800; margin-bottom:12px; color:var(--green);">2. AI Generated Outputs (Review)</div>
+            <div class="list-item" style="border-left: 3px solid var(--green);">
+              <div style="font-size:16px;">📚</div>
+              <div style="flex:1;"><div style="font-size:12px;font-weight:700;">Topic Structure Created</div><div style="font-size:10px;color:rgba(255,255,255,0.5);">12 Units, 48 Subtopics</div></div>
+            </div>
+            <div class="list-item" style="border-left: 3px solid var(--green);">
+              <div style="font-size:16px;">📝</div>
+              <div style="flex:1;"><div style="font-size:12px;font-weight:700;">Assessment Bank</div><div style="font-size:10px;color:rgba(255,255,255,0.5);">240 MCQs Generated</div></div>
+            </div>
+            <div class="list-item" style="border-left: 3px solid var(--amber);">
+              <div style="font-size:16px;">👩‍🏫</div>
+              <div style="flex:1;"><div style="font-size:12px;font-weight:700;">Teacher Lesson Plans</div><div style="font-size:10px;color:rgba(255,255,255,0.5);">Pending review</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-inner split">
+    <div>
+      <div class="tag">Device Ecosystem · Module Q</div>
+      <div class="h2">Controlled Device<br/><em>Integration</em></div>
+      <div class="sub">The ecosystem deeply integrates with Mobile Device Management (MDM) APIs. We push software-triggered signals to hardware to enforce academic focus and monitor fleet health.</div>
+      <div class="frow"><div class="frow-icon">🛑</div><div><div class="frow-title">Exam Mode Enforcement</div><div class="frow-desc">Software signals lock the device into the assessment, disabling background app access.</div></div></div>
+      <div class="frow"><div class="frow-icon">⏳</div><div><div class="frow-title">Screen-Time Compliance</div><div class="frow-desc">System triggers hardware restrictions to limit non-academic usage outside school hours.</div></div></div>
+    </div>
+    <div class="device-bezel desktop">
+      <div class="device-camera"></div>
+      <div class="mock">
+        <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title" style="text-transform:none;">Device Fleet Status · Admin Portal</div></div>
+        <div class="mock-body">
+          <div class="stat-row stat-row-4" style="margin-bottom:16px;">
+            <div class="stat-box"><div class="stat-val">14k</div><div class="stat-lbl">Tablets</div></div>
+            <div class="stat-box"><div class="stat-val" style="color:var(--green);">96%</div><div class="stat-lbl">Online</div></div>
+            <div class="stat-box" style="border-color:rgba(59,130,246,0.3); background:rgba(59,130,246,0.05);"><div class="stat-val" style="color:var(--blue3);">3k</div><div class="stat-lbl">Exam Mode</div></div>
+            <div class="stat-box" style="border-color:rgba(239,68,68,0.3); background:rgba(239,68,68,0.05);"><div class="stat-val" style="color:#ef4444;">112</div><div class="stat-lbl">Sync Fails</div></div>
+          </div>
+          <div class="ui-section" style="margin-top:0;">Live Hardware Triggers</div>
+          <div style="background:rgba(255,255,255,0.02); border-radius:8px; border:1px solid var(--border); overflow-x:auto;">
+            <table style="width:100%; text-align:left; border-collapse:collapse; font-size:12px; min-width: 400px;">
+              <tr style="border-bottom:1px solid var(--border); color:rgba(255,255,255,0.5);">
+                <th style="padding:12px;">School Group</th>
+                <th style="padding:12px;">Trigger Active</th>
+                <th style="padding:12px;">Status</th>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);">
+                <td style="padding:12px; font-weight:700;">GSS Ikeja - JSS 2</td>
+                <td style="padding:12px;"><span class="badge blue">Exam Lock</span></td>
+                <td style="padding:12px; color:var(--green);">Enforced</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--border);">
+                <td style="padding:12px; font-weight:700;">Primary Schools</td>
+                <td style="padding:12px;"><span class="badge amber">Screen-Time</span></td>
+                <td style="padding:12px; color:var(--green);">Post 6PM</td>
+              </tr>
+              <tr>
+                <td style="padding:12px; font-weight:700;">Regional Fleet B</td>
+                <td style="padding:12px;"><span class="badge red">Sync Retry</span></td>
+                <td style="padding:12px; color:var(--amber);">Pending</td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -595,30 +723,29 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
     <div class="h2">Built for Nigeria's<br/><em>Real Conditions</em></div>
     <div class="sub">Designed from the ground up for low bandwidth, remote areas, and managed education tablets — with enterprise-grade security protecting every student's data.</div>
     
-    <div class="g3" style="margin-top: 40px;">
+    <div class="g3" style="margin-top: 20px;">
       <div>
         <div class="ui-section" style="color:var(--blue3);">Offline-First Architecture</div>
-        <div class="frow"><div class="frow-icon">⬇️</div><div><div class="frow-title">Local Caching</div><div class="frow-desc">Lessons download to tablet for true zero-internet studying.</div></div></div>
-        <div class="frow"><div class="frow-icon">💾</div><div><div class="frow-title">Auto-Save</div><div class="frow-desc">No work lost during power or network failures.</div></div></div>
-        <div class="frow"><div class="frow-icon">🔄</div><div><div class="frow-title">Background Sync</div><div class="frow-desc">Data syncs seamlessly when connectivity returns.</div></div></div>
+        <div class="frow" style="padding:8px 0; border:none;"><div class="frow-icon" style="width:32px; height:32px; font-size:14px;">⬇️</div><div><div class="frow-title">Local Caching</div><div class="frow-desc">Zero-internet studying.</div></div></div>
+        <div class="frow" style="padding:8px 0; border:none;"><div class="frow-icon" style="width:32px; height:32px; font-size:14px;">💾</div><div><div class="frow-title">Auto-Save</div><div class="frow-desc">No work lost on power failure.</div></div></div>
+        <div class="frow" style="padding:8px 0; border:none;"><div class="frow-icon" style="width:32px; height:32px; font-size:14px;">🔄</div><div><div class="frow-title">Background Sync</div><div class="frow-desc">Syncs on reconnection.</div></div></div>
       </div>
       <div>
         <div class="ui-section" style="color:var(--blue3);">Enterprise Data Security</div>
-        <div class="frow"><div class="frow-icon">🔒</div><div><div class="frow-title">End-to-End Encryption</div><div class="frow-desc">All data encrypted in transit (TLS 1.2+) and at rest.</div></div></div>
-        <div class="frow"><div class="frow-icon">🛡️</div><div><div class="frow-title">Role-Based Access</div><div class="frow-desc">Strict compartmentalization between user types.</div></div></div>
-        <div class="frow"><div class="frow-icon">✅</div><div><div class="frow-title">Consent Management</div><div class="frow-desc">Parental approval required for sensitive data collection.</div></div></div>
+        <div class="frow" style="padding:8px 0; border:none;"><div class="frow-icon" style="width:32px; height:32px; font-size:14px;">🔒</div><div><div class="frow-title">E2E Encryption</div><div class="frow-desc">Encrypted in transit & rest.</div></div></div>
+        <div class="frow" style="padding:8px 0; border:none;"><div class="frow-icon" style="width:32px; height:32px; font-size:14px;">🛡️</div><div><div class="frow-title">Role-Based Access</div><div class="frow-desc">Strict compartmentalization.</div></div></div>
+        <div class="frow" style="padding:8px 0; border:none;"><div class="frow-icon" style="width:32px; height:32px; font-size:14px;">✅</div><div><div class="frow-title">Consent Management</div><div class="frow-desc">Parental approval layers.</div></div></div>
       </div>
       <div>
         <div class="ui-section" style="color:var(--blue3);">Scale & Device Management</div>
-        <div class="stat-box" style="margin-bottom: 16px;">
-          <div class="stat-val" style="font-size:32px; color:var(--blue2);">1M+</div>
-          <div class="stat-lbl">Simultaneous Users Supported</div>
+        <div class="stat-box" style="margin-bottom: 12px; padding: 8px;">
+          <div class="stat-val" style="font-size:24px; color:var(--blue2);">1M+</div>
+          <div class="stat-lbl">Simultaneous Users</div>
         </div>
-        <div class="stat-box" style="margin-bottom: 16px;">
-          <div class="stat-val" style="font-size:32px; color:var(--green);">99.9%</div>
-          <div class="stat-lbl">System Uptime Guarantee</div>
+        <div class="stat-box" style="margin-bottom: 12px; padding: 8px;">
+          <div class="stat-val" style="font-size:24px; color:var(--green);">99.9%</div>
+          <div class="stat-lbl">Uptime Guarantee</div>
         </div>
-        <div class="frow"><div class="frow-icon">📱</div><div><div class="frow-title">Full MDM Support</div><div class="frow-desc">Exam lock, screen-time control, and health monitoring.</div></div></div>
       </div>
     </div>
   </div>
@@ -627,8 +754,8 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 <div class="slide">
   <div class="slide-inner cover" style="align-items: center; text-align: center;">
     <div class="tag" style="justify-content: center;">Digital Learning Ecosystem</div>
-    <div class="h1" style="font-size: 64px; max-width: 800px;">Transforming Nigerian<br/>Education — <span style="color:var(--blue2);">One Student at a Time</span></div>
-    <div class="sub" style="max-width: 700px; font-size: 18px; margin-bottom: 50px;">From a remote village in Kebbi State to a busy school in Lagos — every student gets a world-class education, and every teacher gets the tools to mentor effectively.</div>
+    <div class="h1" style="font-size: 56px; max-width: 800px;">Transforming Nigerian<br/>Education — <span style="color:var(--blue2);">One Student at a Time</span></div>
+    <div class="sub" style="max-width: 700px; font-size: 16px; margin-bottom: 40px;">From a remote village in Kebbi State to a busy school in Lagos — every student gets a world-class education, and every teacher gets the tools to mentor effectively.</div>
     <div class="g3" style="max-width: 800px; width: 100%; text-align: left;">
       <div class="card" style="padding: 20px; text-align: center;">
         <div style="font-size:28px;margin-bottom:12px;">🤝</div><div class="h3">Partnership</div><div class="sub2">Full support from pilot to national rollout.</div>
@@ -647,7 +774,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 
 <div class="slide-footer">
   <span>iLeaf Solutions Pvt. Ltd. · Secure Confidential Draft</span>
-  <span id="snum">Slide 1 of 12</span>
+  <span id="snum">Slide 1 of 15</span>
 </div>
 
 <script>
