@@ -19,30 +19,44 @@
 body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top right, #14243b, #0a1118); color:#fff; overflow:hidden; height:100vh; width:100vw; user-select:none;}
 
 /* NAV BAR & PROGRESS */
-#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(10, 17, 24, 0.75);backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border);}
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;height:70px;background:rgba(10, 17, 24, 0.75);backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border-bottom:1px solid var(--border);}
+/* Dynamic Padding to match content alignment */
+.nav-container { display:flex; align-items:center; justify-content:space-between; width: 100%; padding: 0 max(40px, calc(50vw - 700px)); height: 100%; transition: padding 0.3s; }
 .brand{display:flex;align-items:center;gap:14px;}
 .logo-box{background:#fff; padding:6px 10px; border-radius:6px; height:36px; display:flex; align-items:center; box-shadow: 0 4px 12px rgba(0,0,0,0.5);}
 .brand-name{font-size:16px;font-weight:800;color:#fff;letter-spacing:0.5px;}
 .brand-url{font-size:11px;color:rgba(255,255,255,0.5);font-weight:500;}
 
+.nav-center{font-size:12px;font-weight:700;color:var(--blue3);letter-spacing:3px;text-transform:uppercase; background: linear-gradient(90deg, #60a5fa, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
 .nav-right{display:flex;align-items:center;gap:16px;}
-.slide-counter { font-size:12px; font-weight:700; color:var(--blue3); letter-spacing:1px; background:rgba(59,130,246,0.1); padding:6px 12px; border-radius:6px; border:1px solid rgba(59,130,246,0.2); }
-.nbtn{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:#fff;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:.2s;}
+.slide-counter { font-size:12px; font-weight:700; color:var(--blue3); letter-spacing:1px; background:rgba(59,130,246,0.1); padding:6px 12px; border-radius:6px; border:1px solid rgba(59,130,246,0.2); white-space:nowrap; }
+.nbtn{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:#fff;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:.2s; white-space:nowrap;}
 .nbtn:hover{background:rgba(255,255,255,0.1); transform: translateY(-1px);}
 
 #progress-bar { position:absolute; bottom:-1px; left:0; height:2px; background:linear-gradient(90deg, #3b82f6, #60a5fa); width:0%; transition:width 0.4s ease; box-shadow:0 0 10px rgba(59,130,246,0.6);}
 
-/* SLIDES */
-#deck{height:100vh;overflow:hidden;position:relative;}
+/* SLIDES & ALIGNMENT */
+#deck{height:100vh;overflow:hidden;position:relative; width:100%;}
 .slide{position:absolute;inset:0;padding-top:70px;opacity:0;transform:scale(0.95) translateY(20px);transition:all .5s cubic-bezier(0.2, 0.8, 0.2, 1);pointer-events:none;}
 .slide.active{opacity:1;transform:scale(1) translateY(0);pointer-events:all;}
 .slide.out{opacity:0;transform:scale(1.05) translateY(-20px);}
-.slide-inner{height:calc(100vh - 70px);overflow-y:auto;padding:40px 80px; padding-bottom: 80px;}
-.slide-inner::-webkit-scrollbar{width:4px;}
-.slide-inner::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:4px;}
+
+/* 📺 SCROLLBAR FIX: 100% Width to force scrollbar to screen edge, Dynamic Padding to center content */
+.slide-inner {
+  width: 100%;
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 40px max(80px, calc(50vw - 700px)) 100px max(80px, calc(50vw - 700px));
+}
+.slide-inner::-webkit-scrollbar { width: 6px; }
+.slide-inner::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+.slide-inner::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+.slide-inner::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
 
 /* SLIDE TYPES */
-.cover{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;height:100%;}
+.cover{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;height:100%; min-height: 100%;}
+.cover.centered { align-items:center; text-align:center; }
 .split{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:center; min-height: 100%;}
 .slide.active .split > div:nth-child(1) { animation: fadeUp 0.6s 0.2s both; }
 .slide.active .split > div:nth-child(2) { animation: fadeUp 0.6s 0.3s both; }
@@ -54,7 +68,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 .h1{font-size:52px;font-weight:800;line-height:1.1;margin-bottom:20px;letter-spacing:-1.5px;}
 .h2{font-size:32px;font-weight:800;line-height:1.2;margin-bottom:12px;letter-spacing:-1px;}
 .h2 em{font-style:normal;color:var(--blue2); background: linear-gradient(90deg, #60a5fa, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
-.sub{font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;font-weight:400;max-width:580px; margin-bottom: 24px;}
+.sub{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.6;font-weight:400;max-width:640px; margin-bottom: 24px;}
 
 /* FEATURE ROW */
 .frow{display:flex;align-items:flex-start;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
@@ -65,17 +79,16 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 
 /* REALISTIC DEVICE MOCKUP */
 .device-bezel { background: #000; padding: 12px; border-radius: 28px; box-shadow: 0 24px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.1); position: relative; width: 100%; max-width: 500px; margin: 0 auto; height: 540px; }
-.device-bezel.desktop { max-width: 800px; border-radius: 12px; padding: 8px; height: 480px; }
+.device-bezel.desktop { max-width: 860px; border-radius: 12px; padding: 8px; height: 480px; }
 .device-camera { position: absolute; top: 50%; left: 4px; width: 6px; height: 6px; background: #111; border-radius: 50%; border: 1px solid #333; transform: translateY(-50%); }
 .desktop .device-camera { top: 4px; left: 50%; transform: translateX(-50%); }
 .mock{background:var(--navy2);border-radius:18px;overflow:hidden; position: relative; height: 100%; display: flex; flex-direction: column;}
 .desktop .mock { border-radius: 8px; }
 .mock-bar{background:rgba(255,255,255,0.03);padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--border); backdrop-filter: blur(10px); flex-shrink: 0;}
 .mock-dot{width:8px;height:8px;border-radius:50%;}
-.mock-title{font-size:11px;color:rgba(255,255,255,0.5);margin-left:auto;font-weight:600; text-transform: uppercase; letter-spacing: 1px;}
+.mock-title{font-size:11px;color:rgba(255,255,255,0.5);margin-left:auto;font-weight:600; text-transform: uppercase; letter-spacing: 1px; white-space:nowrap;}
 .mock-body{padding:20px; overflow-y: auto; flex: 1; background: linear-gradient(180deg, var(--navy2) 0%, var(--navy) 100%);}
-.mock-body::-webkit-scrollbar { width: 4px; }
-.mock-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.mock-body::-webkit-scrollbar { display: none; }
 
 /* GLASSMORPHISM PROJECTION CARDS */
 .glass-card {
@@ -93,7 +106,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 
 /* UI ELEMENTS */
 .ui-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
-.ui-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff; box-shadow: 0 4px 10px rgba(37,99,235,0.4);}
+.ui-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff; box-shadow: 0 4px 10px rgba(37,99,235,0.4); flex-shrink:0;}
 .ui-greeting{font-size:13px;font-weight:700;}
 .ui-subtext{font-size:10px;color:rgba(255,255,255,0.4); margin-top: 2px;}
 
@@ -102,74 +115,112 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 .stat-row-3{grid-template-columns:repeat(3,1fr);}
 .stat-row-2{grid-template-columns:repeat(2,1fr);}
 .stat-val{font-size:18px;font-weight:800; color:#fff;}
-.stat-lbl{font-size:9px;color:rgba(255,255,255,0.5);margin-top:4px;font-weight:600; text-transform: uppercase;}
+.stat-lbl{font-size:9px;color:rgba(255,255,255,0.5);margin-top:4px;font-weight:600; text-transform: uppercase; white-space:nowrap;}
 
 .ui-section{font-size:10px;font-weight:800;letter-spacing:1.5px;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:10px; margin-top: 16px; display:flex; justify-content:space-between; align-items:center;}
 
 .list-item{display:flex;align-items:center;gap:12px; margin-bottom:10px;}
-.btn-primary{background:linear-gradient(135deg, #3b82f6, #2563eb);border-radius:8px;padding:8px 14px;font-size:10px;font-weight:800;color:#fff;cursor:pointer; box-shadow: 0 4px 12px rgba(37,99,235,0.3); text-align: center; border: none;}
-.btn-ghost{background: transparent; border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:8px 14px;font-size:10px;font-weight:700;color:#fff;cursor:pointer; text-align: center;}
+.btn-primary{background:linear-gradient(135deg, #3b82f6, #2563eb);border-radius:8px;padding:8px 14px;font-size:10px;font-weight:800;color:#fff;cursor:pointer; box-shadow: 0 4px 12px rgba(37,99,235,0.3); text-align: center; border: none; white-space:nowrap; transition:0.2s;}
+.btn-ghost{background: transparent; border:1px solid rgba(255,255,255,0.2);border-radius:8px;padding:8px 14px;font-size:10px;font-weight:700;color:#fff;cursor:pointer; text-align: center; white-space:nowrap; transition:0.2s;}
+.btn-primary:hover, .btn-ghost:hover { transform:translateY(-1px); filter:brightness(1.1); }
+
+/* TABLES & DATA GRIDS */
+.table-container { width: 100%; overflow-x: auto; padding-bottom: 8px; }
+table { width:100%; text-align:left; border-collapse:collapse; font-size:13px; color:#fff; min-width: 500px; }
+th { padding:14px 12px; border-bottom:1px solid var(--border-light); color:rgba(255,255,255,0.5); font-size:11px; white-space:nowrap; }
+td { padding:14px 12px; border-bottom:1px solid var(--border); }
+.nowrap { white-space:nowrap; }
 
 .bar-row{margin-bottom:10px;}
 .bar-label{display:flex;justify-content:space-between;font-size:10px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:4px;}
 .bar-track{height:6px;background:rgba(0,0,0,0.3);border-radius:4px;overflow:hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);}
 .bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#3b82f6,#60a5fa); box-shadow: 0 0 10px rgba(59,130,246,0.5);}
-.bar-fill.red{background:linear-gradient(90deg,#dc2626,#ef4444);}
-.bar-fill.amber{background:linear-gradient(90deg,#d97706,#f59e0b);}
-.bar-fill.green{background:linear-gradient(90deg,#10b981,#34d399);}
+.bar-fill.red{background:linear-gradient(90deg,#dc2626,#ef4444); box-shadow: 0 0 10px rgba(239,68,68,0.5);}
+.bar-fill.amber{background:linear-gradient(90deg,#d97706,#f59e0b); box-shadow: 0 0 10px rgba(245,158,11,0.5);}
+.bar-fill.green{background:linear-gradient(90deg,#10b981,#34d399); box-shadow: 0 0 10px rgba(16,185,129,0.5);}
 
-.badge{padding:4px 8px; border-radius:4px; font-size:9px; font-weight:700;}
+.badge{padding:4px 8px; border-radius:4px; font-size:9px; font-weight:700; white-space:nowrap; display:inline-flex; align-items:center; justify-content:center;}
 .badge.red{background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3);}
 .badge.amber{background:rgba(245,158,11,0.15); color:#fbbf24; border:1px solid rgba(245,158,11,0.3);}
 .badge.green{background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);}
 .badge.blue{background:rgba(59,130,246,0.15); color:#60a5fa; border:1px solid rgba(59,130,246,0.3);}
 
-/* Mini Chart */
 .mini-chart-bar { flex:1; background:var(--blue); border-radius:2px 2px 0 0; opacity:0.6;}
 .mini-chart-bar.active { opacity:1; background:var(--blue2); box-shadow:0 -2px 8px rgba(59,130,246,0.5);}
 
 /* CARDS FOR GRID */
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px; max-width: 1200px; margin: 0 auto; width:100%;}
 .card{background:var(--glass); border-radius:16px;padding:24px;}
-.card .h3{font-size:16px;font-weight:700;margin-bottom:8px; color:#fff;}
-.card .sub2{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;}
+.card .h3{font-size:18px;font-weight:700;margin-bottom:8px; color:#fff;}
+.card .sub2{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;}
 
 /* FOOTER */
-.slide-footer{position:fixed;bottom:0;left:0;right:0;height:40px;background:rgba(10, 17, 24, 0.9);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 40px;font-size:11px;font-weight: 500; color:rgba(255,255,255,0.4);z-index:99;}
+.slide-footer{position:fixed;bottom:0;left:0;right:0;height:40px;background:rgba(10, 17, 24, 0.95);border-top:1px solid var(--border); z-index:99;}
+.footer-container{display:flex;align-items:center;justify-content:space-between; width:100%; padding:0 max(40px, calc(50vw - 700px)); height:100%; font-size:11px;font-weight: 500; color:rgba(255,255,255,0.4); transition: padding 0.3s;}
 .slide-footer a { color: var(--blue3); text-decoration: none; font-weight: 700; transition: color 0.2s; }
 .slide-footer a:hover { color: var(--blue2); text-decoration: underline; }
 
 /* DESKTOP LAYOUT HELPER FOR NEW SLIDES */
-.desktop-split-mock { display:grid; grid-template-columns: 1fr 1.5fr; gap: 20px; }
+.desktop-split-mock { display:grid; grid-template-columns: 1fr 1.5fr; gap: 24px; align-items:start;}
 
-/* BRANDING CLOSER (SIDE-BY-SIDE FIXED) */
-.brand-closer { display:flex; align-items:center; justify-content:center; gap:30px; margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 700px; flex-wrap: nowrap; }
-.brand-item { display:flex; align-items:center; gap: 12px; text-align: left; }
-.brand-divider { width:1px; height:40px; background:rgba(255,255,255,0.15); }
+/* BRANDING CLOSER */
+.brand-closer { display:flex; align-items:center; justify-content:center; gap:40px; margin: 60px auto 0 auto; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 800px; flex-wrap: nowrap; }
+.brand-item { display:flex; align-items:center; gap: 16px; text-align: left; }
+.brand-divider { width:1px; height:50px; background:rgba(255,255,255,0.15); }
 
-/* 📱 MOBILE RESPONSIVENESS */
+/* 📺 32" ULTRA-WIDE MONITOR OPTIMIZATION */
+@media (min-width: 1600px) {
+  .slide-inner { padding-top: 60px; }
+  .h1 { font-size: 64px; }
+  .h2 { font-size: 42px; }
+  .sub { font-size: 16px; max-width: 700px; }
+  .frow-icon { width: 44px; height: 44px; font-size: 20px; }
+  .frow-title { font-size: 16px; }
+  .frow-desc { font-size: 14px; }
+  .device-bezel { height: 600px; max-width: 550px; }
+  .device-bezel.desktop { height: 560px; max-width: 960px; }
+  .mock-body { padding: 30px; }
+}
+
+/* 💻 TABLET & SMALL LAPTOP RESPONSIVENESS */
+@media (max-width: 1200px) {
+  .split { grid-template-columns: 1fr; gap: 40px; align-items: start; align-content: start; }
+  .slide-inner { padding: 30px 40px 100px 40px !important; }
+  .nav-container, .footer-container { padding: 0 40px !important; }
+  .device-bezel { height: auto; min-height: 480px; margin-top: 10px; max-width: 100%; }
+  .device-bezel.desktop { height: auto; min-height: 500px; max-width: 100%; }
+  .desktop-split-mock { grid-template-columns: 1fr; gap: 16px; }
+  .desktop .device-camera { display: none; }
+  .g3 { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* 📱 MOBILE RESPONSIVENESS (Flawless Scrolling Fix) */
 @media (max-width: 950px) {
-  #nav { padding: 0 20px; height: 60px; }
-  .nav-center, .brand-url, .slide-dots { display: none; }
-  .brand { gap: 8px; }
-  .slide-inner { padding: 20px 24px 80px 24px; }
-  .split { grid-template-columns: 1fr; gap: 40px; align-items: start; }
+  /* Force top-alignment so content never gets pushed out the top of the screen */
+  .cover, .cover.centered { justify-content: flex-start !important; padding-top: 20px; }
+  .split { align-content: flex-start !important; }
+  
+  #nav { height: 60px; }
+  .nav-container { padding: 0 20px !important; }
+  .brand-url, .nav-center { display: none; }
+  
+  /* CRITICAL SCROLL FIX: Maintain height, but add massive bottom padding for footer */
+  .slide-inner { padding: 20px 20px 120px 20px !important; height: calc(100vh - 60px) !important; }
+  .slide { padding-top: 60px; }
+  
   .h1 { font-size: 36px; letter-spacing: -1px; }
   .h2 { font-size: 28px; }
   .sub { font-size: 13px; margin-bottom: 20px; }
-  .g3 { grid-template-columns: 1fr; gap: 16px; }
-  .device-bezel { height: auto; min-height: 450px; margin-top: 10px; }
-  .device-bezel.desktop { height: auto; min-height: 500px; }
-  .desktop-split-mock { grid-template-columns: 1fr; gap: 12px; }
-  .desktop .device-camera { display: none; }
-  .stat-row-4 { grid-template-columns: 1fr 1fr; }
+  .device-bezel, .device-bezel.desktop { padding:8px; border-radius: 20px; }
+  .stat-row-4, .stat-row-5, .stat-row-3 { grid-template-columns: 1fr 1fr; }
   .heatmap-grid { grid-template-columns: 1fr 1fr !important; }
-  .slide-footer { padding: 0 20px; }
-  .brand-closer { gap: 15px; }
-  .brand-item .logo-box { height: 32px; padding: 4px 8px; }
-  .brand-item { gap: 8px; }
-  .brand-item .brand-title { font-size: 11px !important; }
-  .brand-item .brand-sub { font-size: 8px !important; }
+  .footer-container { padding: 0 20px !important; flex-direction:column; justify-content:center; gap:4px; font-size:9px;}
+  
+  /* Ensure the last slide clusters beautifully without overflowing horizontally */
+  .brand-closer { gap: 15px; flex-wrap: wrap; padding-top: 20px; margin-top: 30px; }
+  .brand-divider { display: none; }
+  .brand-item .logo-box { height: 36px; padding: 4px 8px; }
+  .brand-item .brand-title { font-size: 14px !important; }
 }
 </style>
 </head>
@@ -177,20 +228,22 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 
 <div id="nav">
   <div id="progress-bar"></div>
-  <div class="brand">
-    <div class="logo-box">
-      <img src="ileaf-logo.svg" alt="iLeaf Solutions" style="height: 100%;" />
+  <div class="nav-container">
+    <div class="brand">
+      <div class="logo-box">
+        <img src="ileaf-logo.svg" alt="iLeaf Solutions" style="height: 100%;" />
+      </div>
+      <div>
+        <div class="brand-name">iLeaf Solutions</div>
+        <div class="brand-url">www.ileafsolutions.com</div>
+      </div>
     </div>
-    <div>
-      <div class="brand-name">iLeaf Solutions</div>
-      <div class="brand-url">www.ileafsolutions.com</div>
+    <div class="nav-center">Digital Learning Ecosystem</div>
+    <div class="nav-right">
+      <span class="slide-counter" id="slide-count-display">1 / 35</span>
+      <button class="nbtn" onclick="prev()">Prev</button>
+      <button class="nbtn" style="background:var(--blue); border-color:var(--blue);" onclick="next()">Next</button>
     </div>
-  </div>
-  <div class="nav-center">Digital Learning Ecosystem</div>
-  <div class="nav-right">
-    <span class="slide-counter" id="slide-count-display">1 / 35</span>
-    <button class="nbtn" onclick="prev()">Prev</button>
-    <button class="nbtn" style="background:var(--blue); border-color:var(--blue);" onclick="next()">Next</button>
   </div>
 </div>
 
@@ -217,7 +270,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
     <div>
       <div class="tag">System Overview</div>
       <div class="h2">Connecting Everyone<br/><em>in Education</em></div>
-      <div class="sub">The ecosystem breaks down walls. It securely links the student learning at home with the teacher at school, the parents at work, and the authorities in the capital through seamless data flow.</div>
+      <div class="sub">The ecosystem breaks down walls. It securely links the student learning at home with the teacher at school, the parents at work, and the authorities in the capital through seamless, real-time data flow.</div>
       <div class="frow"><div class="frow-icon">🧑‍🎓</div><div><div class="frow-title">For Students</div><div class="frow-desc">Engaging, low-bandwidth lessons and instant rewards.</div></div></div>
       <div class="frow"><div class="frow-icon">👨‍🏫</div><div><div class="frow-title">For Teachers</div><div class="frow-desc">Automated grading and clear alerts on who needs help today.</div></div></div>
       <div class="frow"><div class="frow-icon">👨‍👩‍👧</div><div><div class="frow-title">For Parents & Schools</div><div class="frow-desc">Instant mobile updates replacing lost paper report cards.</div></div></div>
@@ -228,16 +281,16 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
         <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title" style="text-transform:none;">Ecosystem Data Flow Hub</div></div>
         <div class="mock-body" style="display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative;">
           <div style="position:absolute; width:2px; height:100px; background:rgba(59,130,246,0.3); top:40%; left:50%; transform:translateX(-50%);"></div>
-          <div style="position:absolute; width:260px; height:2px; background:rgba(59,130,246,0.3); top:55%; left:50%; transform:translateX(-50%);"></div>
+          <div style="position:absolute; width:60%; height:2px; background:rgba(59,130,246,0.3); top:55%; left:50%; transform:translateX(-50%);"></div>
 
-          <div class="glass-card" style="padding:20px; text-align:center; width:240px; margin-bottom:40px; z-index:2; border-color:var(--blue); background:rgba(59,130,246,0.1);">
-            <div style="font-size:32px;">🏫</div><div style="font-size:12px; font-weight:800; color:#fff; margin-top:8px;">National Secure Database</div>
-            <div style="font-size:9px; color:rgba(255,255,255,0.6); margin-top:4px;">Encrypted records across 36 states</div>
+          <div class="glass-card" style="padding:20px; text-align:center; width:260px; margin-bottom:40px; z-index:2; border-color:var(--blue); background:rgba(59,130,246,0.1);">
+            <div style="font-size:32px;">🏫</div><div style="font-size:13px; font-weight:800; color:#fff; margin-top:8px;">National Secure Database</div>
+            <div style="font-size:10px; color:rgba(255,255,255,0.6); margin-top:4px;">Encrypted records across 36 states</div>
           </div>
-          <div style="display:flex; gap:20px; z-index:2;">
-            <div class="glass-card" style="padding:16px; text-align:center; width:130px;"><div style="font-size:24px;">👨‍🏫</div><div style="font-size:11px; font-weight:700; color:#fff; margin-top:4px;">Teachers</div><div style="font-size:9px; color:var(--green); margin-top:2px;">Syncing grades</div></div>
-            <div class="glass-card" style="padding:16px; text-align:center; width:130px;"><div style="font-size:24px;">🧑‍🎓</div><div style="font-size:11px; font-weight:700; color:#fff; margin-top:4px;">Students</div><div style="font-size:9px; color:var(--amber); margin-top:2px;">Downloading offline</div></div>
-            <div class="glass-card" style="padding:16px; text-align:center; width:130px;"><div style="font-size:24px;">👨‍👩‍👧</div><div style="font-size:11px; font-weight:700; color:#fff; margin-top:4px;">Parents</div><div style="font-size:9px; color:var(--blue3); margin-top:2px;">Receiving live alerts</div></div>
+          <div style="display:flex; gap:20px; z-index:2; width:100%; justify-content:center; flex-wrap:wrap;">
+            <div class="glass-card" style="padding:16px; text-align:center; width:140px;"><div style="font-size:24px;">👨‍🏫</div><div style="font-size:12px; font-weight:700; color:#fff; margin-top:6px;">Teachers</div><div style="font-size:9px; color:var(--green); margin-top:4px;">Syncing grades</div></div>
+            <div class="glass-card" style="padding:16px; text-align:center; width:140px;"><div style="font-size:24px;">🧑‍🎓</div><div style="font-size:12px; font-weight:700; color:#fff; margin-top:6px;">Students</div><div style="font-size:9px; color:var(--amber); margin-top:4px;">Offline downloads</div></div>
+            <div class="glass-card" style="padding:16px; text-align:center; width:140px;"><div style="font-size:24px;">👨‍👩‍👧</div><div style="font-size:12px; font-weight:700; color:#fff; margin-top:6px;">Parents</div><div style="font-size:9px; color:var(--blue3); margin-top:4px;">Receiving live alerts</div></div>
           </div>
         </div>
       </div>
@@ -249,25 +302,25 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
   <div class="slide-inner">
     <div class="tag">Our Approach</div>
     <div class="h2">How the System Works<br/><em>Behind the Scenes</em></div>
-    <div class="sub">We built an "Automation-First" model. The system handles the heavy lifting—reading syllabus PDFs, writing questions, and grading tests—solving the problem of understaffed schools and large class sizes.</div>
+    <div class="sub">We built an "Automation-First" model. The system handles the heavy lifting—reading syllabus PDFs, writing questions, and grading tests—solving the critical problem of understaffed schools and large class sizes.</div>
     <div class="g3" style="margin-top: 40px;">
       <div class="glass-card card">
         <div style="font-size:32px;margin-bottom:12px;">1️⃣</div>
         <div class="h3">Read Textbooks</div>
         <div class="sub2">Upload standard Nigerian school PDFs. The AI system reads the pages, organizes topics, and maps them to government standards automatically.</div>
-        <div class="badge blue" style="margin-top:16px; display:inline-block;">Saves 100s of formatting hours</div>
+        <div class="badge blue" style="margin-top:16px;">Saves 100s of formatting hours</div>
       </div>
       <div class="glass-card card">
         <div style="font-size:32px;margin-bottom:12px;">2️⃣</div>
         <div class="h3">Create Content</div>
         <div class="sub2">From the uploaded books, AI instantly writes student study notes, generates thousands of multiple-choice quizzes, and drafts teacher guides.</div>
-        <div class="badge green" style="margin-top:16px; display:inline-block;">Creates unlimited practice tests</div>
+        <div class="badge green" style="margin-top:16px;">Creates unlimited practice tests</div>
       </div>
       <div class="glass-card card">
         <div style="font-size:32px;margin-bottom:12px;">3️⃣</div>
         <div class="h3">Grade & Flag Issues</div>
-        <div class="sub2">The system scores exams instantly without bias. It then analyzes the results to flag exactly which students in a class of 50+ need the teacher's help tomorrow.</div>
-        <div class="badge red" style="margin-top:16px; display:inline-block;">Eliminates weekend marking</div>
+        <div class="sub2">The system scores exams instantly without bias. It analyzes results to flag exactly which students in a class of 50+ need the teacher's help tomorrow.</div>
+        <div class="badge red" style="margin-top:16px;">Eliminates weekend marking</div>
       </div>
     </div>
   </div>
@@ -278,10 +331,10 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
     <div>
       <div class="tag">Student Portal · Feature 1</div>
       <div class="h2">The Student<br/><em>Dashboard</em></div>
-      <div class="sub">A clean, encouraging space to start the day. It clearly separates "Due Today" from optional practice, and features a smart offline queue that safely saves work when internet in remote areas drops.</div>
+      <div class="sub">A clean, encouraging space to start the day. It clearly separates "Due Today" from optional practice, and features a smart offline queue that safely saves work when the internet in remote areas drops.</div>
       <div class="frow"><div class="frow-icon">🔔</div><div><div class="frow-title">Notification Center</div><div class="frow-desc">Alerts for new assignments, earned badges, and teacher messages.</div></div></div>
-      <div class="frow"><div class="frow-icon">📅</div><div><div class="frow-title">Daily Task Management</div><div class="frow-desc">Helps students organize their workload logically across subjects.</div></div></div>
-      <div class="frow"><div class="frow-icon">🔄</div><div><div class="frow-title">Offline Sync Queue</div><div class="frow-desc">Never lose work. Saves answers locally and pushes them when connected.</div></div></div>
+      <div class="frow"><div class="frow-icon">📅</div><div><div class="frow-title">Daily Task Management</div><div class="frow-desc">Helps students logically organize their workload across multiple subjects.</div></div></div>
+      <div class="frow"><div class="frow-icon">🔄</div><div><div class="frow-title">Offline Sync Queue</div><div class="frow-desc">Never lose work. Saves answers locally and pushes them when reconnected.</div></div></div>
     </div>
     <div class="device-bezel">
       <div class="device-camera"></div>
@@ -349,35 +402,35 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
         <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title">Lesson Viewer</div></div>
         <div class="mock-body" style="padding:12px;">
           <div class="glass-card" style="padding:0; overflow:hidden; margin-bottom:12px;">
-            <div style="height:160px; background:url('chloroplast.png') center/cover; position:relative; display:flex; flex-direction:column; justify-content:center; overflow:hidden; border-radius:12px 12px 0 0;">
+            <div style="height:180px; background-color:#111; background-image:url('./chloroplast.png'); background-size:cover; background-position:center; position:relative; display:flex; flex-direction:column; justify-content:center; overflow:hidden; border-radius:12px 12px 0 0;">
               
               <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.9)); z-index:1;"></div>
               
               <div style="align-self:center; width:48px; height:48px; background:rgba(255,255,255,0.2); backdrop-filter:blur(4px); border-radius:50%; border:2px solid #fff; display:flex; align-items:center; justify-content:center; padding-left:4px; z-index:2; cursor:pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">▶</div>
               
-              <div style="position:absolute; bottom:8px; left:12px; right:12px; display:flex; gap:10px; align-items:center; z-index:2;">
-                <span style="font-size:9px; color:#fff; font-weight:700; text-shadow:0 1px 2px #000;">02:14 / 05:30</span>
+              <div style="position:absolute; bottom:12px; left:12px; right:12px; display:flex; gap:10px; align-items:center; z-index:2;">
+                <span style="font-size:10px; color:#fff; font-weight:700; text-shadow:0 1px 2px #000;">02:14 / 05:30</span>
                 <div style="flex:1; height:4px; background:rgba(255,255,255,0.3); border-radius:2px;"><div style="width:40%; height:100%; background:var(--blue2); border-radius:2px; box-shadow:0 0 8px var(--blue2);"></div></div>
                 <span style="font-size:12px; color:#fff; text-shadow:0 1px 2px #000;">🔊</span> <span style="font-size:12px; color:#fff; text-shadow:0 1px 2px #000;">⛶</span>
               </div>
-              <div class="badge green" style="position:absolute; top:8px; right:8px; font-size:8px; z-index:2; background:rgba(16,185,129,0.8); color:#fff; border:none;">✓ Saved Offline</div>
+              <div class="badge green" style="position:absolute; top:12px; right:12px; font-size:9px; z-index:2; background:rgba(16,185,129,0.8); color:#fff; border:none; box-shadow:0 2px 6px rgba(0,0,0,0.4);">✓ Saved Offline</div>
             </div>
             
             <div style="padding:16px;">
               <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                 <div>
-                  <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:4px;">Understanding Plant Cells</div>
-                  <div style="font-size:10px; color:rgba(255,255,255,0.5); font-weight:600;">Basic Science · Unit 2</div>
+                  <div style="font-size:15px; font-weight:800; color:#fff; margin-bottom:4px;">Understanding Plant Cells</div>
+                  <div style="font-size:11px; color:rgba(255,255,255,0.6); font-weight:600;">Basic Science · Unit 2</div>
                 </div>
-                <button class="btn-ghost" style="padding:6px 10px; font-size:9px;">🔊 Read Aloud</button>
+                <button class="btn-ghost" style="padding:6px 10px; font-size:10px;">🔊 Read Aloud</button>
               </div>
             </div>
           </div>
-          <div class="glass-card" style="font-size:12px; color:rgba(255,255,255,0.8); line-height:1.6; padding:16px;">
+          <div class="glass-card" style="font-size:13px; color:rgba(255,255,255,0.8); line-height:1.6; padding:16px;">
             <p style="margin-bottom:12px;">Every living plant is made of tiny building blocks called cells. Inside these cells are special parts that help the plant make its own food using sunlight.</p>
             <div style="background:rgba(59,130,246,0.1); border-left:3px solid var(--blue); padding:10px 14px; border-radius:0 6px 6px 0; margin:14px 0;">
               <strong style="color:var(--blue3); font-size:11px; text-transform:uppercase; letter-spacing:1px;">Key Word: Chloroplasts</strong><br/>
-              <span style="color:rgba(255,255,255,0.7); font-size:11px;">The tiny factories inside leaves that catch sunlight to create energy through photosynthesis.</span>
+              <span style="color:rgba(255,255,255,0.7); font-size:12px;">The tiny factories inside leaves that catch sunlight to create energy through photosynthesis.</span>
             </div>
           </div>
         </div>
@@ -413,8 +466,8 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
             <div style="display:flex; width:100%; align-items:center; gap:16px;">
               <div style="font-size: 32px;">💡</div>
               <div style="flex:1;">
-                <div style="font-size:13px;font-weight:700; color:#fff; margin-bottom:4px;">Let's Review Fractions!</div>
-                <div style="font-size:11px;color:rgba(255,255,255,0.7); line-height:1.4;">We noticed you struggled with finding the common denominator on yesterday's quiz.</div>
+                <div style="font-size:14px;font-weight:700; color:#fff; margin-bottom:4px;">Let's Review Fractions!</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.7); line-height:1.5;">We noticed you struggled with finding the common denominator on yesterday's quiz.</div>
               </div>
             </div>
             <div style="display:flex; gap:10px; width:100%; margin-top:16px;">
@@ -446,27 +499,27 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
            <div style="text-align:center; font-size:10px; font-weight:700; color:rgba(255,255,255,0.5); margin-bottom:16px; letter-spacing:1px;">QUESTION 3 OF 5</div>
            
            <div class="glass-card" style="margin-bottom:20px;">
-             <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:16px;">Match the term to its definition:</div>
+             <div style="font-size:14px; font-weight:700; color:#fff; margin-bottom:16px;">Match the term to its definition:</div>
              
              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:12px; background:rgba(0,0,0,0.3); border-radius:8px; border:1px dashed rgba(255,255,255,0.2);">
-                <div style="font-size:12px; font-weight:700; color:#fff; width:40%;">Photosynthesis</div>
+                <div style="font-size:13px; font-weight:700; color:#fff; width:40%;">Photosynthesis</div>
                 <div style="width:20px; height:2px; background:var(--blue);"></div>
-                <div class="glass-card" style="padding:10px; font-size:10px; width:45%; border-color:var(--blue); background:rgba(59,130,246,0.15);">Making food from sunlight</div>
+                <div class="glass-card" style="padding:10px; font-size:11px; width:45%; border-color:var(--blue); background:rgba(59,130,246,0.15);">Making food from sunlight</div>
              </div>
              
              <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:rgba(0,0,0,0.3); border-radius:8px; border:1px dashed rgba(255,255,255,0.2);">
-                <div style="font-size:12px; font-weight:700; color:#fff; width:40%;">Chlorophyll</div>
+                <div style="font-size:13px; font-weight:700; color:#fff; width:40%;">Chlorophyll</div>
                 <div style="width:20px; height:2px; background:rgba(255,255,255,0.1);"></div>
-                <div style="padding:10px; font-size:10px; color:rgba(255,255,255,0.3); width:45%; text-align:center; border:1px dashed rgba(255,255,255,0.2); border-radius:6px;">Drop answer here</div>
+                <div style="padding:10px; font-size:11px; color:rgba(255,255,255,0.3); width:45%; text-align:center; border:1px dashed rgba(255,255,255,0.2); border-radius:6px;">Drop answer here</div>
              </div>
              
              <div style="margin-top:24px; display:flex; gap:10px;">
-               <div class="glass-card" style="flex:1; padding:12px 8px; font-size:10px; text-align:center; cursor:grab; box-shadow:0 6px 12px rgba(0,0,0,0.4); border-bottom:3px solid rgba(255,255,255,0.2);">The green pigment in leaves</div>
-               <div class="glass-card" style="flex:1; padding:12px 8px; font-size:10px; text-align:center; cursor:grab; box-shadow:0 6px 12px rgba(0,0,0,0.4); border-bottom:3px solid rgba(255,255,255,0.2);">The roots of a tree</div>
+               <div class="glass-card" style="flex:1; padding:12px 8px; font-size:11px; text-align:center; cursor:grab; box-shadow:0 6px 12px rgba(0,0,0,0.4); border-bottom:3px solid rgba(255,255,255,0.2);">The green pigment in leaves</div>
+               <div class="glass-card" style="flex:1; padding:12px 8px; font-size:11px; text-align:center; cursor:grab; box-shadow:0 6px 12px rgba(0,0,0,0.4); border-bottom:3px solid rgba(255,255,255,0.2);">The roots of a tree</div>
              </div>
            </div>
            
-           <button class="btn-primary" style="width:100%; padding:14px; font-size:12px;">Submit Answer</button>
+           <button class="btn-primary" style="width:100%; padding:14px; font-size:13px;">Submit Answer</button>
         </div>
       </div>
     </div>
@@ -500,22 +553,22 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           
           <div class="glass-card" style="margin-bottom:16px;">
             <div style="font-size:10px; color:rgba(255,255,255,0.4); margin-bottom:8px; font-weight:700;">Q4: FILL IN THE BLANK</div>
-            <div style="font-size:13px;font-weight:600;line-height:1.6; color:#fff;">
+            <div style="font-size:14px;font-weight:600;line-height:1.6; color:#fff;">
               Water boils at <span style="display:inline-block; border-bottom:1px solid #fff; width:40px; text-align:center; color:var(--blue3); font-weight:800; background:rgba(255,255,255,0.05);">100</span> degrees Celsius.
             </div>
           </div>
           
           <div class="glass-card" style="margin-bottom:20px;">
             <div style="font-size:10px; color:rgba(255,255,255,0.4); margin-bottom:8px; font-weight:700;">Q5: MULTIPLE CHOICE</div>
-            <div style="font-size:13px;font-weight:600;line-height:1.5; margin-bottom:12px; color:#fff;">If a train travels 60 miles in 2 hours, what is its average speed?</div>
+            <div style="font-size:14px;font-weight:600;line-height:1.5; margin-bottom:12px; color:#fff;">If a train travels 60 miles in 2 hours, what is its average speed?</div>
             <div style="display:flex;flex-direction:column;gap:8px;">
-              <div class="glass-card" style="background:rgba(37,99,235,0.2); border-color:var(--blue); font-size:12px;font-weight:700;display:flex;align-items:center;gap:12px; padding:10px; color:#fff;"><span style="background:var(--blue);width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;">A</span>30 mph</div>
-              <div class="glass-card" style="font-size:12px;font-weight:600;display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.7); padding:10px;"><span style="background:rgba(255,255,255,0.1);width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;">B</span>120 mph</div>
+              <div class="glass-card" style="background:rgba(37,99,235,0.2); border-color:var(--blue); font-size:13px;font-weight:700;display:flex;align-items:center;gap:12px; padding:10px; color:#fff;"><span style="background:var(--blue);width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;">A</span>30 mph</div>
+              <div class="glass-card" style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:12px;color:rgba(255,255,255,0.7); padding:10px;"><span style="background:rgba(255,255,255,0.1);width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;">B</span>120 mph</div>
             </div>
           </div>
           
           <div style="text-align:center; font-size:10px; color:rgba(255,255,255,0.4); margin-bottom:12px;">💾 Answers safely synced 2 seconds ago</div>
-          <button class="btn-primary" style="width:100%; padding:14px; font-size:12px;">Next Page →</button>
+          <button class="btn-primary" style="width:100%; padding:14px; font-size:13px;">Next Page →</button>
         </div>
       </div>
     </div>
@@ -554,8 +607,8 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <div class="glass-card list-item" style="border-left: 3px solid var(--green);">
             <div style="font-size: 20px;">📝</div>
             <div style="flex:1;">
-              <div style="font-size:12px;font-weight:700; color:#fff;">Science Unit 2 Final</div>
-              <div style="font-size:9px; color:rgba(255,255,255,0.5); margin-top:4px;">Graded yesterday via AI</div>
+              <div style="font-size:13px;font-weight:700; color:#fff;">Science Unit 2 Final</div>
+              <div style="font-size:10px; color:rgba(255,255,255,0.5); margin-top:4px;">Graded yesterday via AI</div>
             </div>
             <div class="badge green" style="font-size:14px; padding:6px 10px;">88%</div>
           </div>
@@ -602,27 +655,27 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <div class="stat-row stat-row-2">
             <div class="glass-card stat-box" style="padding:16px 12px;">
               <div style="font-size:32px; margin-bottom:12px;">📚</div>
-              <div style="font-size:12px; font-weight:700; color:#fff;">Story Books</div>
-              <div style="font-size:10px; color:rgba(255,255,255,0.5); margin:6px 0 12px 0; font-weight:600;">200 pts</div>
-              <button class="btn-primary" style="width:100%;">Get Item</button>
+              <div style="font-size:13px; font-weight:700; color:#fff;">Story Books</div>
+              <div style="font-size:11px; color:rgba(255,255,255,0.5); margin:6px 0 12px 0; font-weight:600;">200 pts</div>
+              <button class="btn-primary" style="width:100%; padding:10px;">Get Item</button>
             </div>
             <div class="glass-card stat-box" style="padding:16px 12px;">
               <div style="font-size:32px; margin-bottom:12px;">🧸</div>
-              <div style="font-size:12px; font-weight:700; color:#fff;">Ed. Toys</div>
-              <div style="font-size:10px; color:rgba(255,255,255,0.5); margin:6px 0 12px 0; font-weight:600;">500 pts</div>
-              <button class="btn-primary" style="width:100%;">Get Item</button>
+              <div style="font-size:13px; font-weight:700; color:#fff;">Ed. Toys</div>
+              <div style="font-size:11px; color:rgba(255,255,255,0.5); margin:6px 0 12px 0; font-weight:600;">500 pts</div>
+              <button class="btn-primary" style="width:100%; padding:10px;">Get Item</button>
             </div>
             <div class="glass-card stat-box" style="padding:16px 12px; opacity:0.5;">
               <div style="font-size:36px; margin-bottom:12px; filter:grayscale(1);">🎒</div>
-              <div style="font-size:12px; font-weight:700; color:#fff;">School Bag</div>
-              <div style="font-size:10px; color:rgba(255,255,255,0.5); margin:6px 0 12px 0; font-weight:600;">1500 pts</div>
-              <button class="btn-ghost" style="width:100%;">Locked</button>
+              <div style="font-size:13px; font-weight:700; color:#fff;">School Bag</div>
+              <div style="font-size:11px; color:rgba(255,255,255,0.5); margin:6px 0 12px 0; font-weight:600;">1500 pts</div>
+              <button class="btn-ghost" style="width:100%; padding:10px;">Locked</button>
             </div>
             <div class="glass-card stat-box" style="padding:16px 12px;">
               <div style="font-size:32px; margin-bottom:12px;">🍦</div>
-              <div style="font-size:12px; font-weight:700; color:#fff;">Food Voucher</div>
-              <div style="font-size:10px; color:rgba(255,255,255,0.5); margin:6px 0 12px 0; font-weight:600;">150 pts</div>
-              <button class="btn-primary" style="width:100%;">Get Item</button>
+              <div style="font-size:13px; font-weight:700; color:#fff;">Food Voucher</div>
+              <div style="font-size:11px; color:rgba(255,255,255,0.5); margin:6px 0 12px 0; font-weight:600;">150 pts</div>
+              <button class="btn-primary" style="width:100%; padding:10px;">Get Item</button>
             </div>
           </div>
         </div>
@@ -647,7 +700,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
         <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title">Check-in</div></div>
         <div class="mock-body" style="display:flex; flex-direction:column;">
           <div style="text-align:center;margin-bottom:16px;">
-            <div style="font-size:14px;font-weight:800;margin-bottom:6px; color:#fff;">Weekly Reflection</div>
+            <div style="font-size:15px;font-weight:800;margin-bottom:6px; color:#fff;">Weekly Reflection</div>
             <div style="font-size:12px;color:rgba(255,255,255,0.6);">"What was the hardest part of math this week?"</div>
           </div>
           
@@ -668,7 +721,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
             </div>
           </div>
           
-          <div class="glass-card" style="display:flex; justify-content:space-between; align-items:center; background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.3); padding:12px 16px; margin-bottom:12px;">
+          <div class="glass-card" style="display:flex; justify-content:space-between; align-items:center; background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.3); padding:14px 16px; margin-bottom:12px;">
              <div style="font-size:12px; color:#fff; font-weight:700;">🔒 Parent Consent Verified</div>
              <div style="font-size:16px;">✅</div>
           </div>
@@ -709,25 +762,25 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
             <div class="ui-section" style="font-size:11px;">⚠️ Needs Attention Today</div>
             <div class="glass-card list-item" style="border-left: 3px solid #ef4444; padding:12px;">
               <div class="ui-avatar" style="background: #333;">A</div>
-              <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#fff;">Amaka Okafor</div><div style="font-size:10px;color:#ef4444; margin-top:2px;">Score dropped 15%</div></div>
-              <button class="btn-ghost" style="border-color:rgba(239,68,68,0.4); color:#f87171;">Intervene</button>
+              <div style="flex:1;"><div style="font-size:14px;font-weight:700;color:#fff;">Amaka Okafor</div><div style="font-size:11px;color:#ef4444; margin-top:4px;">Score dropped 15%</div></div>
+              <button class="btn-ghost" style="border-color:rgba(239,68,68,0.4); color:#f87171; padding:8px 12px;">Intervene</button>
             </div>
           </div>
           <div>
             <div class="ui-section" style="margin-top:0; font-size:11px;">Quick Actions</div>
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:24px;">
-               <div class="glass-card" style="text-align:center; cursor:pointer; padding:16px;"><div style="font-size:28px; margin-bottom:8px;">📢</div><div style="font-size:11px; font-weight:700; color:#fff;">Message Class</div></div>
-               <div class="glass-card" style="text-align:center; cursor:pointer; padding:16px;"><div style="font-size:28px; margin-bottom:8px;">📥</div><div style="font-size:11px; font-weight:700; color:#fff;">Export Grades</div></div>
+               <div class="glass-card" style="text-align:center; cursor:pointer; padding:16px;"><div style="font-size:28px; margin-bottom:8px;">📢</div><div style="font-size:12px; font-weight:700; color:#fff;">Message Class</div></div>
+               <div class="glass-card" style="text-align:center; cursor:pointer; padding:16px;"><div style="font-size:28px; margin-bottom:8px;">📥</div><div style="font-size:12px; font-weight:700; color:#fff;">Export Grades</div></div>
             </div>
             
             <div class="ui-section" style="margin-top:0; font-size:11px;">Pending AI Approvals</div>
             <div class="glass-card stat-box" style="text-align: left; margin-bottom:12px; padding:16px;">
                <div style="display:flex; justify-content: space-between; margin-bottom: 12px;">
-                 <strong style="font-size: 13px; color:#fff;">3 Short Answers Ready</strong>
-                 <span class="badge amber" style="font-size:10px;">Action needed</span>
+                 <strong style="font-size: 14px; color:#fff;">3 Short Answers Ready</strong>
+                 <span class="badge amber" style="font-size:11px;">Action needed</span>
                </div>
                <div style="display:flex; gap: 8px;">
-                 <button class="btn-primary" style="flex:1; font-size:11px; padding:10px;">Review Now</button>
+                 <button class="btn-primary" style="flex:1; font-size:12px; padding:12px;">Review Now</button>
                </div>
             </div>
           </div>
@@ -759,40 +812,40 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
             </div>
           </div>
           
-          <div class="glass-card list-item" style="cursor:pointer; border-left: 3px solid var(--blue2); padding:12px;">
+          <div class="glass-card list-item" style="cursor:pointer; border-left: 3px solid var(--blue2); padding:16px;">
             <div class="ui-avatar" style="background:var(--blue);">C</div>
             <div style="flex:1;">
-              <div style="font-size:13px;font-weight:700;color:#fff;">Chidi Eze</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.6); margin-top:2px;">Avg: 82% · Att: 95%</div>
+              <div style="font-size:14px;font-weight:700;color:#fff;">Chidi Eze</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.6); margin-top:4px;">Avg: 82% · Att: 95%</div>
             </div>
-            <div class="badge green" style="padding:4px 8px;">Excelling</div>
+            <div class="badge green" style="padding:6px 10px;">Excelling</div>
           </div>
           
-          <div class="glass-card list-item" style="cursor:pointer; border-left: 3px solid #ef4444; background:rgba(239,68,68,0.05); padding:12px;">
+          <div class="glass-card list-item" style="cursor:pointer; border-left: 3px solid #ef4444; background:rgba(239,68,68,0.05); padding:16px;">
             <div class="ui-avatar" style="background:#333;">A</div>
             <div style="flex:1;">
-              <div style="font-size:13px;font-weight:700;color:#fff;">Amaka Okafor</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.6); margin-top:2px;">Avg: 45% · Att: 60%</div>
+              <div style="font-size:14px;font-weight:700;color:#fff;">Amaka Okafor</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.6); margin-top:4px;">Avg: 45% · Att: 60%</div>
             </div>
-            <div class="badge red" style="padding:4px 8px;">High Risk</div>
+            <div class="badge red" style="padding:6px 10px;">High Risk</div>
           </div>
           
-          <div class="glass-card list-item" style="cursor:pointer; padding:12px;">
+          <div class="glass-card list-item" style="cursor:pointer; padding:16px;">
             <div class="ui-avatar" style="background:var(--blue);">O</div>
             <div style="flex:1;">
-              <div style="font-size:13px;font-weight:700;color:#fff;">Oluwaseun Ade</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.6); margin-top:2px;">Avg: 76% · Att: 90%</div>
+              <div style="font-size:14px;font-weight:700;color:#fff;">Oluwaseun Ade</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.6); margin-top:4px;">Avg: 76% · Att: 90%</div>
             </div>
-            <div class="badge blue" style="padding:4px 8px;">Average</div>
+            <div class="badge blue" style="padding:6px 10px;">Average</div>
           </div>
           
-          <div class="glass-card list-item" style="cursor:pointer; padding:12px;">
+          <div class="glass-card list-item" style="cursor:pointer; padding:16px;">
             <div class="ui-avatar" style="background:var(--blue);">F</div>
             <div style="flex:1;">
-              <div style="font-size:13px;font-weight:700;color:#fff;">Fatima Bello</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.6); margin-top:2px;">Avg: 70% · Att: 92%</div>
+              <div style="font-size:14px;font-weight:700;color:#fff;">Fatima Bello</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.6); margin-top:4px;">Avg: 70% · Att: 92%</div>
             </div>
-            <div class="badge blue" style="padding:4px 8px;">Average</div>
+            <div class="badge blue" style="padding:6px 10px;">Average</div>
           </div>
         </div>
       </div>
@@ -808,7 +861,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
       <div class="sub">Teachers no longer spend weekends marking papers. The AI instantly evaluates written answers against a rubric, explicitly showing its logic matrix so teachers can quickly approve.</div>
       <div class="frow"><div class="frow-icon">⚖️</div><div><div class="frow-title">Fair Matrix Scoring</div><div class="frow-desc">Evaluates answers for specific required concepts, not just exact wording.</div></div></div>
       <div class="frow"><div class="frow-icon">🧐</div><div><div class="frow-title">Explainable AI Highlights</div><div class="frow-desc">Highlights exactly what the student got right and what they missed in green and yellow.</div></div></div>
-      <div class="frow"><div class="frow-icon">🛡️</div><div><div class="frow-title">Zero-Bias Override Rule</div><div class="frow-desc">Teachers can propose an override to the AI's score, but it requires School Principal approval to guarantee grading fairness.</div></div></div>
+      <div class="frow"><div class="frow-icon">🛡️</div><div><div class="frow-title">Zero-Bias Override Rule</div><div class="frow-desc">Teachers can propose an override to the AI's score, but it securely routes to School Admins to guarantee national grading fairness.</div></div></div>
     </div>
     <div class="device-bezel desktop">
       <div class="device-camera"></div>
@@ -816,33 +869,33 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
         <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title" style="text-transform:none;">AI Grading Review Queue</div></div>
         <div class="mock-body desktop-split-mock">
           <div class="glass-card">
-            <div style="font-size:10px; font-weight:800; color:rgba(255,255,255,0.4); margin-bottom:8px; letter-spacing:1px;">STUDENT ANSWER: CHIDI EZE</div>
-            <div style="font-size:14px; font-weight:700; color:#fff; margin-bottom:14px;">Question: "Explain why leaves turn yellow in autumn."</div>
-            <div style="font-size:13px; color:rgba(255,255,255,0.8); padding:16px; background:rgba(0,0,0,0.3); border-radius:8px; line-height:1.6; border:1px solid rgba(255,255,255,0.1);">
+            <div style="font-size:10px; font-weight:800; color:rgba(255,255,255,0.5); margin-bottom:8px; letter-spacing:1px;">STUDENT ANSWER: CHIDI EZE</div>
+            <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:14px;">Question: "Explain why leaves turn yellow in autumn."</div>
+            <div style="font-size:14px; color:rgba(255,255,255,0.8); padding:16px; background:rgba(0,0,0,0.3); border-radius:8px; line-height:1.6; border:1px solid rgba(255,255,255,0.1);">
               "Leaves turn yellow because they stop making <span style="background:rgba(16,185,129,0.3); padding:2px 6px; border-radius:4px; border:1px solid rgba(16,185,129,0.5);">chlorophyll</span> when it gets <span style="background:rgba(16,185,129,0.3); padding:2px 6px; border-radius:4px; border:1px solid rgba(16,185,129,0.5);">cold</span> and there is <span style="background:rgba(16,185,129,0.3); padding:2px 6px; border-radius:4px; border:1px solid rgba(16,185,129,0.5);">less sun</span>."
             </div>
           </div>
           <div>
-            <div class="glass-card" style="border-color:rgba(16,185,129,0.3); background:rgba(16,185,129,0.05); margin-bottom:12px;">
+            <div class="glass-card" style="border-color:rgba(16,185,129,0.3); background:rgba(16,185,129,0.05); margin-bottom:16px;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-                <div style="font-size:13px; font-weight:700; color:#fff;">🤖 AI Rubric Matrix</div>
-                <div class="badge green" style="font-size:12px; padding:6px 10px;">Total: 9/10</div>
+                <div style="font-size:14px; font-weight:700; color:#fff;">🤖 AI Rubric Matrix</div>
+                <div class="badge green" style="font-size:13px; padding:6px 10px;">Total: 9/10</div>
               </div>
               
-              <div style="display:grid; grid-template-columns: 1fr 40px; gap:12px; font-size:11px; color:rgba(255,255,255,0.8); margin-bottom:12px;">
-                <div style="border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">Identifies 'chlorophyll'</div>
-                <div style="border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px; font-weight:700; color:#34d399;">4/4</div>
+              <div style="display:grid; grid-template-columns: 1fr 40px; gap:12px; font-size:12px; color:rgba(255,255,255,0.8); margin-bottom:12px;">
+                <div style="border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:8px;">Identifies 'chlorophyll'</div>
+                <div style="border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:8px; font-weight:700; color:#34d399;">4/4</div>
                 
-                <div style="border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">Mentions seasonal trigger (cold/sun)</div>
-                <div style="border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px; font-weight:700; color:#34d399;">4/4</div>
+                <div style="border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:8px;">Mentions seasonal trigger (cold/sun)</div>
+                <div style="border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:8px; font-weight:700; color:#34d399;">4/4</div>
                 
                 <div style="color:#fbbf24;">Mentions underlying yellow pigments</div>
                 <div style="font-weight:700; color:#fbbf24;">1/2</div>
               </div>
             </div>
             <div style="display:flex; flex-direction:column; gap:8px;">
-              <button class="btn-primary" style="width:100%; padding:14px; font-size:11px;">✓ Approve AI Score</button>
-              <button class="btn-ghost" style="width:100%; padding:10px; font-size:10px; border-color:rgba(255,255,255,0.3); color:rgba(255,255,255,0.7);">🛡️ Request Override (Requires Admin)</button>
+              <button class="btn-primary" style="width:100%; padding:14px; font-size:12px;">✓ Approve AI Score</button>
+              <button class="btn-ghost" style="width:100%; padding:12px; font-size:11px; border-color:rgba(255,255,255,0.3); color:rgba(255,255,255,0.7);">🛡️ Request Override (Requires Admin)</button>
             </div>
           </div>
         </div>
@@ -869,26 +922,26 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           
           <div class="glass-card" style="border-left: 3px solid #ef4444; margin-bottom:24px; padding:16px;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-              <div style="font-size:14px; font-weight:800; color:#fff;">Amaka Okafor</div>
+              <div style="font-size:15px; font-weight:800; color:#fff;">Amaka Okafor</div>
               <div class="badge red" style="padding:6px 10px;">High Risk Trajectory</div>
             </div>
-            <div style="font-size:12px; color:rgba(255,255,255,0.8); line-height:1.6; margin-bottom:16px;">
+            <div style="font-size:12px; color:rgba(255,255,255,0.8); line-height:1.6; margin-bottom:20px;">
               System detected a sharp 15% drop in science scores alongside 3 missed login days over the past two weeks.
             </div>
             
-            <div style="font-size:10px; color:rgba(255,255,255,0.5); font-weight:700; margin-bottom:8px; letter-spacing:1px;">SCORE TREND (LAST 4 WEEKS)</div>
-            <div style="height:60px; display:flex; align-items:flex-end; gap:6px; padding-bottom:4px; border-bottom:1px solid rgba(255,255,255,0.3); border-left:1px solid rgba(255,255,255,0.3); padding-left:4px;">
-               <div style="flex:1; background:rgba(255,255,255,0.2); height:80%; border-radius:2px 2px 0 0;"></div>
-               <div style="flex:1; background:rgba(255,255,255,0.2); height:75%; border-radius:2px 2px 0 0;"></div>
-               <div style="flex:1; background:var(--amber); height:60%; border-radius:2px 2px 0 0;"></div>
-               <div style="flex:1; background:var(--red); height:45%; border-radius:2px 2px 0 0; box-shadow:0 0 12px rgba(239,68,68,0.6);"></div>
+            <div style="font-size:10px; color:rgba(255,255,255,0.5); font-weight:700; margin-bottom:10px; letter-spacing:1px;">SCORE TREND (LAST 4 WEEKS)</div>
+            <div style="height:70px; display:flex; align-items:flex-end; gap:8px; padding-bottom:4px; border-bottom:1px solid rgba(255,255,255,0.3); border-left:1px solid rgba(255,255,255,0.3); padding-left:4px;">
+               <div style="flex:1; background:rgba(255,255,255,0.2); height:80%; border-radius:3px 3px 0 0;"></div>
+               <div style="flex:1; background:rgba(255,255,255,0.2); height:75%; border-radius:3px 3px 0 0;"></div>
+               <div style="flex:1; background:var(--amber); height:60%; border-radius:3px 3px 0 0;"></div>
+               <div style="flex:1; background:var(--red); height:45%; border-radius:3px 3px 0 0; box-shadow:0 0 12px rgba(239,68,68,0.6);"></div>
             </div>
-            <div style="display:flex; justify-content:space-between; font-size:9px; color:rgba(255,255,255,0.5); margin-top:4px; padding-left:4px;">
+            <div style="display:flex; justify-content:space-between; font-size:10px; color:rgba(255,255,255,0.5); margin-top:6px; padding-left:4px;">
               <span>Wk 1</span><span>Wk 2</span><span>Wk 3</span><span>Wk 4</span>
             </div>
           </div>
           
-          <button class="btn-primary" style="width:100%; padding:14px; font-size:12px;">Review Full Student Profile</button>
+          <button class="btn-primary" style="width:100%; padding:16px; font-size:12px;">Review Full Student Profile</button>
         </div>
       </div>
     </div>
@@ -911,12 +964,12 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
         <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title" style="text-transform:none;">Student Support Hub: Amaka O.</div></div>
         <div class="mock-body desktop-split-mock">
           <div>
-            <div class="glass-card" style="background:rgba(96,165,250,0.1); border-color:rgba(96,165,250,0.3); margin-bottom:20px; padding:16px;">
-              <div style="font-size:11px; font-weight:800; color:var(--blue3); margin-bottom:8px; letter-spacing:1px;">🤖 AI SUGGESTED ACTION</div>
+            <div class="glass-card" style="background:rgba(96,165,250,0.1); border-color:rgba(96,165,250,0.3); margin-bottom:20px; padding:20px;">
+              <div style="font-size:11px; font-weight:800; color:var(--blue3); margin-bottom:10px; letter-spacing:1px;">🤖 AI SUGGESTED ACTION</div>
               <div style="font-size:13px; color:#fff; line-height:1.6;">
                 Assign "Foundational Science Refresher" module and send standard attendance check-in alert to parents.
               </div>
-              <button class="btn-primary" style="margin-top:12px; padding:10px 16px;">Apply Both Actions</button>
+              <button class="btn-primary" style="margin-top:16px; padding:12px 18px; font-size:11px;">Apply Both Actions</button>
             </div>
             
             <div class="ui-section" style="font-size:11px;">Message Parent (Template)</div>
@@ -932,14 +985,14 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <div>
             <div class="ui-section" style="margin-top:0; font-size:11px;">Past Support History Log</div>
             <div class="glass-card" style="margin-bottom:12px; padding:14px;">
-               <div style="font-size: 12px; font-weight:800; color:#fff;">Spoke after class</div>
-               <p style="font-size: 11px; color: rgba(255,255,255,0.7); margin: 6px 0; line-height:1.5;">"Student mentioned internet issues at home preventing offline sync. Extended deadline manually."</p>
-               <div style="font-size: 9px; color: rgba(255,255,255,0.4); margin-top:8px;">Logged Oct 12 · 14:30 PM</div>
+               <div style="font-size: 13px; font-weight:800; color:#fff;">Spoke after class</div>
+               <p style="font-size: 12px; color: rgba(255,255,255,0.7); margin: 8px 0; line-height:1.5;">"Student mentioned internet issues at home preventing offline sync. Extended deadline manually."</p>
+               <div style="font-size: 10px; color: rgba(255,255,255,0.4); margin-top:10px;">Logged Oct 12 · 14:30 PM</div>
             </div>
             <div class="glass-card" style="opacity:0.7; padding:14px;">
-               <div style="font-size: 12px; font-weight:800; color:#fff;">Assigned Remedial Practice</div>
-               <p style="font-size: 11px; color: rgba(255,255,255,0.7); margin: 6px 0; line-height:1.5;">"Sent basic algebra practice module."</p>
-               <div style="font-size: 9px; color: rgba(255,255,255,0.4); margin-top:8px;">Logged Sept 28 · 09:15 AM</div>
+               <div style="font-size: 13px; font-weight:800; color:#fff;">Assigned Remedial Practice</div>
+               <p style="font-size: 12px; color: rgba(255,255,255,0.7); margin: 8px 0; line-height:1.5;">"Sent basic algebra practice module."</p>
+               <div style="font-size: 10px; color: rgba(255,255,255,0.4); margin-top:10px;">Logged Sept 28 · 09:15 AM</div>
             </div>
           </div>
         </div>
@@ -965,17 +1018,17 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
         <div class="mock-body">
           <div class="ui-section" style="margin-top:0; font-size:11px;">Class Mastery by Topic</div>
           <div class="glass-card" style="margin-bottom:24px; padding:16px;">
-            <div class="bar-row" style="margin-bottom:16px;"><div class="bar-label"><span>Plant Cells</span><span>88% (Strong)</span></div><div class="bar-track" style="height:8px;"><div class="bar-fill green" style="width:88%"></div></div></div>
-            <div class="bar-row" style="margin-bottom:16px;"><div class="bar-label"><span>Photosynthesis</span><span>72% (Average)</span></div><div class="bar-track" style="height:8px;"><div class="bar-fill" style="width:72%"></div></div></div>
-            <div class="bar-row"><div class="bar-label"><span>Human Skeleton</span><span style="color:#f87171; font-weight:800;">45% Class Weakness</span></div><div class="bar-track" style="height:8px;"><div class="bar-fill red" style="width:45%; box-shadow:0 0 10px rgba(239,68,68,0.6);"></div></div></div>
+            <div class="bar-row" style="margin-bottom:16px;"><div class="bar-label"><span>Plant Cells</span><span>88% (Strong)</span></div><div class="bar-track" style="height:10px;"><div class="bar-fill green" style="width:88%"></div></div></div>
+            <div class="bar-row" style="margin-bottom:16px;"><div class="bar-label"><span>Photosynthesis</span><span>72% (Average)</span></div><div class="bar-track" style="height:10px;"><div class="bar-fill" style="width:72%"></div></div></div>
+            <div class="bar-row"><div class="bar-label"><span>Human Skeleton</span><span style="color:#f87171; font-weight:800;">45% Class Weakness</span></div><div class="bar-track" style="height:10px;"><div class="bar-fill red" style="width:45%; box-shadow:0 0 10px rgba(239,68,68,0.6);"></div></div></div>
           </div>
           
           <div class="ui-section" style="font-size:11px;">Class Distribution (Grades)</div>
-          <div class="glass-card" style="margin-bottom:24px; padding:20px; display:flex; gap:4px; height:100px; align-items:flex-end; border-bottom:1px solid rgba(255,255,255,0.2);">
-             <div style="flex:1; background:rgba(239,68,68,0.6); height:20%; border-radius:4px 4px 0 0; display:flex; justify-content:center; padding-top:4px; font-size:9px; color:#fff; font-weight:700;">0-40</div>
-             <div style="flex:1; background:rgba(245,158,11,0.6); height:40%; border-radius:4px 4px 0 0; display:flex; justify-content:center; padding-top:4px; font-size:9px; color:#fff; font-weight:700;">40-60</div>
-             <div style="flex:1; background:var(--blue); height:90%; border-radius:4px 4px 0 0; display:flex; justify-content:center; padding-top:4px; font-size:9px; color:#fff; font-weight:700; box-shadow:0 -4px 12px rgba(59,130,246,0.4);">60-80</div>
-             <div style="flex:1; background:var(--green); height:50%; border-radius:4px 4px 0 0; display:flex; justify-content:center; padding-top:4px; font-size:9px; color:#fff; font-weight:700;">80-100</div>
+          <div class="glass-card" style="margin-bottom:24px; padding:20px; display:flex; gap:6px; height:120px; align-items:flex-end; border-bottom:1px solid rgba(255,255,255,0.2);">
+             <div style="flex:1; background:rgba(239,68,68,0.6); height:20%; border-radius:4px 4px 0 0; display:flex; justify-content:center; padding-top:6px; font-size:10px; color:#fff; font-weight:700;">0-40</div>
+             <div style="flex:1; background:rgba(245,158,11,0.6); height:40%; border-radius:4px 4px 0 0; display:flex; justify-content:center; padding-top:6px; font-size:10px; color:#fff; font-weight:700;">40-60</div>
+             <div style="flex:1; background:var(--blue); height:90%; border-radius:4px 4px 0 0; display:flex; justify-content:center; padding-top:6px; font-size:10px; color:#fff; font-weight:700; box-shadow:0 -4px 12px rgba(59,130,246,0.4);">60-80</div>
+             <div style="flex:1; background:var(--green); height:50%; border-radius:4px 4px 0 0; display:flex; justify-content:center; padding-top:6px; font-size:10px; color:#fff; font-weight:700;">80-100</div>
           </div>
           
           <button class="btn-primary" style="width:100%; padding:14px; font-size:12px;">📥 Export Term Report (CSV)</button>
@@ -1024,8 +1077,8 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <div class="glass-card list-item" style="border-left: 4px solid var(--green); padding:16px;">
             <div style="font-size:20px;">✓</div>
             <div style="flex:1;">
-              <div style="font-size:13px;font-weight:700;color:#fff;">Finished Math Quiz</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.5); margin-top:4px;">Scored 85% · 2 hours ago</div>
+              <div style="font-size:14px;font-weight:700;color:#fff;">Finished Math Quiz</div>
+              <div style="font-size:11px;color:rgba(255,255,255,0.5); margin-top:4px;">Scored 85% · 2 hours ago</div>
             </div>
           </div>
         </div>
@@ -1051,16 +1104,16 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
         <div class="mock-body">
           <div class="ui-section" style="margin-top:0; font-size:11px;">Current Performance vs Class</div>
           <div class="glass-card" style="margin-bottom:24px; padding:20px;">
-            <div class="bar-row" style="margin-bottom:16px;"><div class="bar-label"><span>Mathematics</span><span>78% · Class Avg 65%</span></div><div class="bar-track" style="height:8px;"><div class="bar-fill" style="width:78%"></div></div></div>
-            <div class="bar-row" style="margin-bottom:16px;"><div class="bar-label"><span>English</span><span>85% · Class Avg 70%</span></div><div class="bar-track" style="height:8px;"><div class="bar-fill green" style="width:85%"></div></div></div>
-            <div class="bar-row"><div class="bar-label"><span style="color:#f87171; font-weight:800;">Basic Science ⚠️</span><span>61% · Class Avg 68%</span></div><div class="bar-track" style="height:8px;"><div class="bar-fill red" style="width:61%"></div></div></div>
+            <div class="bar-row" style="margin-bottom:16px;"><div class="bar-label"><span style="font-size:12px;">Mathematics</span><span style="font-size:11px;">78% · Class Avg 65%</span></div><div class="bar-track" style="height:10px;"><div class="bar-fill" style="width:78%"></div></div></div>
+            <div class="bar-row" style="margin-bottom:16px;"><div class="bar-label"><span style="font-size:12px;">English</span><span style="font-size:11px;">85% · Class Avg 70%</span></div><div class="bar-track" style="height:10px;"><div class="bar-fill green" style="width:85%"></div></div></div>
+            <div class="bar-row"><div class="bar-label"><span style="font-size:12px; color:#f87171;">Basic Science ⚠️</span><span style="font-size:11px;">61% · Class Avg 68%</span></div><div class="bar-track" style="height:10px;"><div class="bar-fill red" style="width:61%"></div></div></div>
           </div>
           
           <div class="ui-section" style="font-size:11px;">Term 1 Official Report Card</div>
           <div class="glass-card" style="text-align:center; padding:24px;">
              <div style="font-size:32px; margin-bottom:12px;">📄</div>
-             <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:4px;">Ready for Parent Review</div>
-             <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-bottom:16px;">Requires parent signature before Term 2 begins.</div>
+             <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:8px;">Ready for Parent Review</div>
+             <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-bottom:20px;">Requires parent signature before Term 2 begins.</div>
              <button class="btn-primary" style="width:100%; padding:14px; font-size:12px;">Digitally Sign Report</button>
           </div>
         </div>
@@ -1086,24 +1139,24 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <div class="ui-section" style="margin-top:0; font-size:11px;">Recent High-Priority Alerts</div>
           
           <div class="glass-card list-item" style="border-left: 4px solid #ef4444; margin-bottom:16px; padding:16px;">
-            <div style="font-size:24px;">⚠️</div>
+            <div style="font-size:28px;">⚠️</div>
             <div style="flex:1;">
-              <div style="font-size:13px;font-weight:800;color:#fff;">Science Score Dropped</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.7); margin-top:6px; line-height:1.5;">Chidi scored 45% on the last test, significantly down from his 75% average.</div>
+              <div style="font-size:14px;font-weight:800;color:#fff;">Science Score Dropped</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.7); margin-top:6px; line-height:1.5;">Chidi scored 45% on the last test, significantly down from his 75% average.</div>
             </div>
           </div>
           
           <div class="glass-card list-item" style="border-left: 4px solid #f59e0b; margin-bottom:24px; background:rgba(245,158,11,0.05); padding:16px;">
-            <div style="font-size:24px;">📅</div>
+            <div style="font-size:28px;">📅</div>
             <div style="flex:1;">
-              <div style="font-size:13px;font-weight:800;color:#fff;">Absence Noted</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.7); margin-top:6px; line-height:1.5;">Chidi did not log into his tablet yesterday and was marked absent by the system.</div>
+              <div style="font-size:14px;font-weight:800;color:#fff;">Absence Noted</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.7); margin-top:6px; line-height:1.5;">Chidi did not log into his tablet yesterday and was marked absent by the system.</div>
             </div>
           </div>
           
           <div class="ui-section" style="font-size:11px;">Notification Settings</div>
           <div class="glass-card list-item" style="justify-content:space-between; opacity:0.8; padding:16px;">
-            <div style="font-size:12px; font-weight:700; color:#fff;">Push Notifications (Phone app)</div>
+            <div style="font-size:13px; font-weight:700; color:#fff;">Push Notifications (Phone app)</div>
             <div style="width:40px; height:22px; background:var(--green); border-radius:12px; position:relative; box-shadow:0 0 10px rgba(16,185,129,0.4);">
                <div style="width:18px; height:18px; background:#fff; border-radius:50%; position:absolute; top:2px; right:2px;"></div>
             </div>
@@ -1131,21 +1184,21 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <div class="ui-section" style="margin-top:0; font-size:11px;">Direct Message from Teacher</div>
           <div class="glass-card" style="border-left: 4px solid var(--blue2); padding:20px; margin-bottom:24px;">
             <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
-              <span style="font-size:13px; font-weight:800; color:#fff;">Mr. Adebayo (Science)</span>
-              <span style="font-size:10px; color:rgba(255,255,255,0.5);">Oct 12, 14:30 PM</span>
+              <span style="font-size:14px; font-weight:800; color:#fff;">Mr. Adebayo (Science)</span>
+              <span style="font-size:11px; color:rgba(255,255,255,0.5);">Oct 12, 14:30 PM</span>
             </div>
-            <div style="font-size:12px; color:rgba(255,255,255,0.8); line-height:1.6; font-style:italic; background:rgba(0,0,0,0.2); padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.05);">
+            <div style="font-size:13px; color:rgba(255,255,255,0.8); line-height:1.6; font-style:italic; background:rgba(0,0,0,0.2); padding:16px; border-radius:8px; border:1px solid rgba(255,255,255,0.05);">
               "Chidi is participating well in class, but has struggled slightly with the latest Cell Biology module. I have sent an AI suggested remedial lesson to his tablet. Please ensure he completes it this weekend."
             </div>
-            <button class="btn-primary" style="margin-top:16px; font-size:11px; padding:10px 16px; width:100%;">Reply to Teacher</button>
+            <button class="btn-primary" style="margin-top:16px; font-size:12px; padding:12px 16px; width:100%;">Reply to Teacher</button>
           </div>
           
           <div class="ui-section" style="font-size:11px;">School Board Announcements</div>
           <div class="glass-card list-item" style="border-left: 4px solid #10b981; padding:16px;">
             <div style="font-size:28px;">📢</div>
             <div style="flex:1;">
-              <div style="font-size:13px;font-weight:800;color:#fff;">Term 2 Exam Schedule Released</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.6); margin-top:6px;">Tap to view official dates and exam rules.</div>
+              <div style="font-size:14px;font-weight:800;color:#fff;">Term 2 Exam Schedule Released</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.6); margin-top:6px;">Tap to view official dates and exam rules.</div>
             </div>
           </div>
         </div>
@@ -1182,7 +1235,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
               <div class="glass-card stat-box"><div class="stat-val" style="color:var(--green);">91%</div><div class="stat-lbl">Attnd.</div></div>
             </div>
             <div class="ui-section" style="font-size:11px;">Performance by Grade</div>
-            <div class="glass-card" style="padding:16px;">
+            <div class="glass-card" style="padding:20px;">
               <div class="bar-row" style="margin-bottom:12px;"><div class="bar-label"><span>JSS 1</span><span>81%</span></div><div class="bar-track" style="height:8px;"><div class="bar-fill" style="width:81%"></div></div></div>
               <div class="bar-row" style="margin-bottom:12px;"><div class="bar-label"><span>JSS 2</span><span>74%</span></div><div class="bar-track" style="height:8px;"><div class="bar-fill" style="width:74%"></div></div></div>
               <div class="bar-row"><div class="bar-label"><span>JSS 3</span><span>68%</span></div><div class="bar-track" style="height:8px;"><div class="bar-fill amber" style="width:68%"></div></div></div>
@@ -1192,12 +1245,12 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
              <div class="ui-section" style="margin-top:0; font-size:11px;">High-Risk Interventions Required</div>
              <div class="glass-card list-item" style="border-left: 4px solid #ef4444; padding:16px;">
                <div class="ui-avatar" style="background:#333;">A</div>
-               <div style="flex:1;"><div style="font-size:13px;font-weight:800;color:#fff;">Amaka O. (JSS 2)</div><span class="badge red" style="display:inline-block; margin-top:6px;">Dropout Risk</span></div>
+               <div style="flex:1;"><div style="font-size:14px;font-weight:800;color:#fff;">Amaka O. (JSS 2)</div><span class="badge red" style="display:inline-block; margin-top:6px;">Dropout Risk</span></div>
                <button class="btn-ghost" style="padding:8px 12px; border-color:rgba(239,68,68,0.4); color:#f87171;">Review</button>
              </div>
              <div class="glass-card list-item" style="border-left: 4px solid #f59e0b; padding:16px;">
                <div class="ui-avatar" style="background:#333;">E</div>
-               <div style="flex:1;"><div style="font-size:13px;font-weight:800;color:#fff;">Emeka D. (JSS 3)</div><span class="badge amber" style="display:inline-block; margin-top:6px;">Low Attendance</span></div>
+               <div style="flex:1;"><div style="font-size:14px;font-weight:800;color:#fff;">Emeka D. (JSS 3)</div><span class="badge amber" style="display:inline-block; margin-top:6px;">Low Attendance</span></div>
                <button class="btn-ghost" style="padding:8px 12px;">Review</button>
              </div>
           </div>
@@ -1222,35 +1275,35 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
         <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title" style="text-transform:none;">Staff & Classes</div></div>
         <div class="mock-body">
           <div class="ui-section" style="margin-top:0; display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-size:12px;">Teacher Roster & Workload</span>
-            <button class="btn-primary" style="padding:8px 14px; font-size:11px; box-shadow:0 4px 10px rgba(59,130,246,0.4);">+ Assign Teacher</button>
+            <span style="font-size:13px;">Teacher Roster & Workload</span>
+            <button class="btn-primary" style="padding:10px 16px; font-size:12px; box-shadow:0 4px 10px rgba(59,130,246,0.4);">+ Assign Teacher</button>
           </div>
           
-          <div class="glass-card" style="overflow-x:auto; padding:0;">
-            <table style="width:100%; text-align:left; border-collapse:collapse; font-size:13px; color:#fff;">
-              <tr style="border-bottom:1px solid var(--border-light); color:rgba(255,255,255,0.5); background:rgba(0,0,0,0.2);">
-                <th style="padding:16px;">Teacher Name</th>
-                <th style="padding:16px;">Assigned Subject</th>
-                <th style="padding:16px;">Assigned Classes</th>
-                <th style="padding:16px;">Workload Status</th>
-              </tr>
-              <tr style="border-bottom:1px solid var(--border);">
-                <td style="padding:16px; font-weight:800;">Mr. Adebayo</td>
-                <td style="padding:16px;">Basic Science</td>
-                <td style="padding:16px; font-family:monospace; color:var(--blue3); font-size:11px;">JSS 1A, JSS 2B, JSS 3A</td>
-                <td style="padding:16px;"><span class="badge green" style="padding:6px 10px;">Normal (3 classes)</span></td>
-              </tr>
-              <tr style="border-bottom:1px solid var(--border); background:rgba(245,158,11,0.05);">
-                <td style="padding:16px; font-weight:800;">Mrs. Okafor</td>
-                <td style="padding:16px;">Mathematics</td>
-                <td style="padding:16px; font-family:monospace; color:var(--blue3); font-size:11px;">JSS 1A, JSS 1B, JSS 2A, JSS 2B</td>
-                <td style="padding:16px;"><span class="badge amber" style="padding:6px 10px;">Heavy (4 classes)</span></td>
+          <div class="glass-card table-container" style="padding:0;">
+            <table>
+              <tr style="background:rgba(0,0,0,0.2);">
+                <th>Teacher Name</th>
+                <th>Assigned Subject</th>
+                <th>Assigned Classes</th>
+                <th>Workload Status</th>
               </tr>
               <tr>
-                <td style="padding:16px; font-weight:800;">Mr. Eze</td>
-                <td style="padding:16px;">English Language</td>
-                <td style="padding:16px; font-family:monospace; color:var(--blue3); font-size:11px;">JSS 3A, JSS 3B</td>
-                <td style="padding:16px;"><span class="badge green" style="padding:6px 10px;">Light (2 classes)</span></td>
+                <td class="nowrap" style="padding:16px; font-weight:800;">Mr. Adebayo</td>
+                <td class="nowrap" style="padding:16px;">Basic Science</td>
+                <td style="padding:16px; font-family:monospace; color:var(--blue3); font-size:11px; line-height:1.5;">JSS 1A, JSS 2B, JSS 3A</td>
+                <td class="nowrap" style="padding:16px;"><span class="badge green" style="padding:6px 10px;">Normal (3 classes)</span></td>
+              </tr>
+              <tr style="background:rgba(245,158,11,0.05);">
+                <td class="nowrap" style="padding:16px; font-weight:800;">Mrs. Okafor</td>
+                <td class="nowrap" style="padding:16px;">Mathematics</td>
+                <td style="padding:16px; font-family:monospace; color:var(--blue3); font-size:11px; line-height:1.5;">JSS 1A, JSS 1B, JSS 2A, JSS 2B</td>
+                <td class="nowrap" style="padding:16px;"><span class="badge amber" style="padding:6px 10px;">Heavy (4 classes)</span></td>
+              </tr>
+              <tr>
+                <td class="nowrap" style="padding:16px; font-weight:800;">Mr. Eze</td>
+                <td class="nowrap" style="padding:16px;">English Language</td>
+                <td style="padding:16px; font-family:monospace; color:var(--blue3); font-size:11px; line-height:1.5;">JSS 3A, JSS 3B</td>
+                <td class="nowrap" style="padding:16px;"><span class="badge green" style="padding:6px 10px;">Light (2 classes)</span></td>
               </tr>
             </table>
           </div>
@@ -1382,7 +1435,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
             <div style="display:flex; width:100%; align-items:center; gap:12px;">
               <div style="font-size:28px;">🛠️</div>
               <div style="flex:1;">
-                <div style="font-size:13px;font-weight:800;color:#fff;">Sync Failure - JSS 1 Cart</div>
+                <div style="font-size:14px;font-weight:800;color:#fff;">Sync Failure - JSS 1 Cart</div>
                 <div style="font-size:11px;color:rgba(255,255,255,0.7); margin-top:6px;">14 devices failing to download Term 2. Requires manual IT reset.</div>
               </div>
             </div>
@@ -1393,7 +1446,7 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
             <div style="display:flex; width:100%; align-items:center; gap:12px;">
               <div style="font-size:28px;">🔋</div>
               <div style="flex:1;">
-                <div style="font-size:13px;font-weight:800;color:#fff;">Battery Degradation</div>
+                <div style="font-size:14px;font-weight:800;color:#fff;">Battery Degradation</div>
                 <div style="font-size:11px;color:rgba(255,255,255,0.7); margin-top:6px;">Device ID #4490 (Chidi Eze) is failing to hold charge past 20%. Swap recommended.</div>
               </div>
             </div>
@@ -1648,16 +1701,16 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
             <div class="glass-card list-item" style="border-left: 4px solid var(--green); padding:16px; margin-bottom:16px;">
               <div style="font-size:24px;">📚</div>
               <div style="flex:1;">
-                <div style="font-size:13px;font-weight:800; color:#fff;">Course Structure Built</div>
-                <div style="font-size:11px;color:rgba(255,255,255,0.6); margin-top:4px;">Mapped 12 Units, 48 Subtopics</div>
+                <div style="font-size:14px;font-weight:800; color:#fff;">Course Structure Built</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.6); margin-top:4px;">Mapped 12 Units, 48 Subtopics</div>
               </div>
               <div class="badge green" style="padding:6px 10px;">Complete</div>
             </div>
             <div class="glass-card list-item" style="border-left: 4px solid var(--green); padding:16px;">
               <div style="font-size:24px;">📝</div>
               <div style="flex:1;">
-                <div style="font-size:13px;font-weight:800; color:#fff;">Assessment Bank</div>
-                <div style="font-size:11px;color:rgba(255,255,255,0.6); margin-top:4px;">Generated 240 Multiple Choice Questions</div>
+                <div style="font-size:14px;font-weight:800; color:#fff;">Assessment Bank</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.6); margin-top:4px;">Generated 240 Multiple Choice Questions</div>
               </div>
               <div class="badge green" style="padding:6px 10px;">Complete</div>
             </div>
@@ -1683,27 +1736,27 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
         <div class="mock-bar"><div class="mock-dot" style="background:#ef4444;"></div><div class="mock-dot" style="background:#f59e0b;"></div><div class="mock-dot" style="background:#10b981;"></div><div class="mock-title" style="text-transform:none;">Device Fleet Controls (MDM)</div></div>
         <div class="mock-body">
           <div class="ui-section" style="margin-top:0; font-size:11px;">Active Hardware Triggers</div>
-          <div class="glass-card" style="overflow-x:auto; padding:0;">
-            <table style="width:100%; text-align:left; border-collapse:collapse; font-size:13px; color:#fff;">
+          <div class="glass-card table-container" style="padding:0;">
+            <table>
               <tr style="border-bottom:1px solid var(--border-light); color:rgba(255,255,255,0.5); background:rgba(0,0,0,0.2);">
                 <th style="padding:16px;">School Group Target</th>
                 <th style="padding:16px;">Active Hardware Rule</th>
                 <th style="padding:16px;">MDM Status</th>
               </tr>
               <tr style="border-bottom:1px solid var(--border);">
-                <td style="padding:16px; font-weight:800;">GSS Ikeja - JSS 2</td>
-                <td style="padding:16px;"><span class="badge blue" style="padding:6px 10px;">Exam Kiosk Lock On</span></td>
-                <td style="padding:16px; color:var(--green); font-weight:700;">Enforced (42 devices locked)</td>
+                <td class="nowrap" style="padding:16px; font-weight:800;">GSS Ikeja - JSS 2</td>
+                <td class="nowrap" style="padding:16px;"><span class="badge blue" style="padding:6px 10px;">Exam Kiosk Lock On</span></td>
+                <td class="nowrap" style="padding:16px; color:var(--green); font-weight:700;">Enforced (42 devices locked)</td>
               </tr>
               <tr style="border-bottom:1px solid var(--border); background:rgba(245,158,11,0.05);">
-                <td style="padding:16px; font-weight:800;">All Primary Schools</td>
-                <td style="padding:16px;"><span class="badge amber" style="padding:6px 10px;">Screen-Time Limit</span></td>
-                <td style="padding:16px; color:var(--green); font-weight:700;">Enforced post 6PM automatically</td>
+                <td class="nowrap" style="padding:16px; font-weight:800;">All Primary Schools</td>
+                <td class="nowrap" style="padding:16px;"><span class="badge amber" style="padding:6px 10px;">Screen-Time Limit</span></td>
+                <td class="nowrap" style="padding:16px; color:var(--green); font-weight:700;">Enforced post 6PM automatically</td>
               </tr>
               <tr>
-                <td style="padding:16px; font-weight:800;">Regional Fleet B</td>
-                <td style="padding:16px;"><span class="badge red" style="padding:6px 10px;">Force Sync Retry</span></td>
-                <td style="padding:16px; color:var(--amber); font-weight:700;">Pending Network Connection</td>
+                <td class="nowrap" style="padding:16px; font-weight:800;">Regional Fleet B</td>
+                <td class="nowrap" style="padding:16px;"><span class="badge red" style="padding:6px 10px;">Force Sync Retry</span></td>
+                <td class="nowrap" style="padding:16px; color:var(--amber); font-weight:700;">Pending Network Connection</td>
               </tr>
             </table>
           </div>
@@ -1717,22 +1770,24 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
   <div class="slide-inner">
     <div class="tag">System Capabilities</div>
     <div class="h2">A Complete Ecosystem<br/><em>From Top to Bottom</em></div>
-    <div class="sub" style="margin-bottom: 32px; max-width:800px; font-size:16px;">Beyond the core dashboards, the platform includes hundreds of engineered workflows to handle every aspect of the Nigerian school system natively, ensuring absolutely no process is left behind.</div>
+    <div class="sub" style="margin-bottom: 40px; max-width:900px; font-size:16px;">Beyond the core dashboards, the platform includes hundreds of engineered workflows to handle every aspect of the Nigerian school system natively, ensuring absolutely no process is left behind.</div>
 
-    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:24px;margin-bottom:24px;">
-      <div class="glass-card" style="padding:24px;">
-        <div style="font-size:18px;font-weight:800;color:var(--blue3);margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;">🧑‍🎓 Students</div>
-        <ul style="font-size:14px;color:rgba(255,255,255,0.8);line-height:2.2;padding-left:20px;">
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:24px; margin: 0 auto 24px auto; max-width: 1400px;">
+      
+      <div class="glass-card" style="flex: 1 1 30%; min-width: 280px; padding:24px;">
+        <div style="font-size:20px;font-weight:800;color:var(--blue3);margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;">🧑‍🎓 Students</div>
+        <ul style="font-size:15px;color:rgba(255,255,255,0.8);line-height:2.4;padding-left:24px;">
           <li>Interactive Match & Sequence UI</li>
-          <li>Conflict Resolution Sync</li>
+          <li>Conflict Resolution Syncing</li>
           <li>Multi-Device Session Control</li>
           <li>Profile Avatar & Edit Controls</li>
           <li>Data Consent & Revocation Flows</li>
         </ul>
       </div>
-      <div class="glass-card" style="padding:24px;">
-        <div style="font-size:18px;font-weight:800;color:var(--green);margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;">👨‍🏫 Teachers</div>
-        <ul style="font-size:14px;color:rgba(255,255,255,0.8);line-height:2.2;padding-left:20px;">
+      
+      <div class="glass-card" style="flex: 1 1 30%; min-width: 280px; padding:24px;">
+        <div style="font-size:20px;font-weight:800;color:var(--green);margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;">👨‍🏫 Teachers</div>
+        <ul style="font-size:15px;color:rgba(255,255,255,0.8);line-height:2.4;padding-left:24px;">
           <li>Automated Rubric Mapping</li>
           <li>Class Activity & Event Logs</li>
           <li>Student Flagging System</li>
@@ -1740,9 +1795,10 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <li>Detailed Review Status Tracking</li>
         </ul>
       </div>
-      <div class="glass-card" style="padding:24px;">
-        <div style="font-size:18px;font-weight:800;color:var(--amber);margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;">👨‍👩‍👧 Parents</div>
-        <ul style="font-size:14px;color:rgba(255,255,255,0.8);line-height:2.2;padding-left:20px;">
+      
+      <div class="glass-card" style="flex: 1 1 30%; min-width: 280px; padding:24px;">
+        <div style="font-size:20px;font-weight:800;color:var(--amber);margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;">👨‍👩‍👧 Parents</div>
+        <ul style="font-size:15px;color:rgba(255,255,255,0.8);line-height:2.4;padding-left:24px;">
           <li>Secure OTP Password Recovery</li>
           <li>Multi-Child Dashboard Linking</li>
           <li>Direct Teacher Feedback History</li>
@@ -1750,12 +1806,10 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <li>PDF Academic Report Downloads</li>
         </ul>
       </div>
-    </div>
-    
-    <div style="display:grid;grid-template-columns:repeat(2, 1fr);gap:24px; max-width:66%;">
-      <div class="glass-card" style="padding:24px;">
-        <div style="font-size:18px;font-weight:800;color:#f87171;margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;">🏫 Schools</div>
-        <ul style="font-size:14px;color:rgba(255,255,255,0.8);line-height:2.2;padding-left:20px;">
+      
+      <div class="glass-card" style="flex: 1 1 40%; min-width: 320px; padding:24px;">
+        <div style="font-size:20px;font-weight:800;color:#f87171;margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;">🏫 Schools</div>
+        <ul style="font-size:15px;color:rgba(255,255,255,0.8);line-height:2.4;padding-left:24px;">
           <li>Academic Year Configuration</li>
           <li>Student Transfer & Cohort Logic</li>
           <li>CSV Grade & Performance Exports</li>
@@ -1763,9 +1817,10 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <li>System Content Update Alerts</li>
         </ul>
       </div>
-      <div class="glass-card" style="padding:24px;">
-        <div style="font-size:18px;font-weight:800;color:#c084fc;margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;">🏛️ National Authority</div>
-        <ul style="font-size:14px;color:rgba(255,255,255,0.8);line-height:2.2;padding-left:20px;">
+      
+      <div class="glass-card" style="flex: 1 1 40%; min-width: 320px; padding:24px;">
+        <div style="font-size:20px;font-weight:800;color:#c084fc;margin-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:12px;">🏛️ National Authority</div>
+        <ul style="font-size:15px;color:rgba(255,255,255,0.8);line-height:2.4;padding-left:24px;">
           <li>Role Hierarchy Management</li>
           <li>Cross-Region Performance Ranking</li>
           <li>Assessment Difficulty Tracking</li>
@@ -1773,48 +1828,48 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
           <li>Rule Versioning & Security Audits</li>
         </ul>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
 
 <div class="slide">
-  <div class="slide-inner cover" style="align-items: center; text-align: center;">
+  <div class="slide-inner cover centered">
     <div class="tag" style="justify-content: center;">Digital Learning Ecosystem</div>
-    <div class="h1" style="font-size: 52px; max-width: 800px;">Transforming Nigerian<br/>Education — <span style="color:var(--blue2);">One Student at a Time</span></div>
-    <div class="sub" style="max-width: 700px; font-size: 16px; margin-bottom: 40px;">From a remote village in Kebbi State to a busy school in Lagos — every student gets a world-class education, and every teacher gets the tools to mentor effectively. No internet? No problem.</div>
-    <div class="g3" style="max-width: 800px; width: 100%; text-align: left;">
+    <div class="h1" style="font-size: 56px; max-width: 900px;">Transforming Nigerian<br/>Education — <span style="color:var(--blue2);">One Student at a Time</span></div>
+    <div class="sub" style="max-width: 700px; font-size: 16px; margin-bottom: 50px;">From a remote village in Kebbi State to a busy school in Lagos — every student gets a world-class education, and every teacher gets the tools to mentor effectively. No internet? No problem.</div>
+    <div class="g3" style="max-width: 900px; width: 100%; text-align: left; margin:0 auto;">
       <div class="glass-card card" style="padding: 24px; text-align: center;">
-        <div style="font-size:32px;margin-bottom:12px;">🤝</div><div class="h3">Partnership</div><div class="sub2">Full support from pilot to national rollout.</div>
+        <div style="font-size:36px;margin-bottom:16px;">🤝</div><div class="h3" style="font-size:20px;">Partnership</div><div class="sub2" style="font-size:14px;">Full support from pilot to national rollout.</div>
       </div>
       <div class="glass-card card" style="padding: 24px; text-align: center;">
-        <div style="font-size:32px;margin-bottom:12px;">📅</div><div class="h3">Phased Rollout</div><div class="sub2">Structured progression: Pilot → Regional → National.</div>
+        <div style="font-size:36px;margin-bottom:16px;">📅</div><div class="h3" style="font-size:20px;">Phased Rollout</div><div class="sub2" style="font-size:14px;">Structured progression: Pilot → Regional → National.</div>
       </div>
       <div class="glass-card card" style="padding: 24px; text-align: center;">
-        <div style="font-size:32px;margin-bottom:12px;">🎓</div><div class="h3">Training</div><div class="sub2">Comprehensive onboarding for teachers and admins.</div>
+        <div style="font-size:36px;margin-bottom:16px;">🎓</div><div class="h3" style="font-size:20px;">Training</div><div class="sub2" style="font-size:14px;">Comprehensive onboarding for teachers and admins.</div>
       </div>
     </div>
     
     <div class="brand-closer">
       <div class="brand-item">
-        <div class="logo-box" style="height:44px; padding: 6px 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+        <div class="logo-box" style="height:48px; padding: 8px 16px; box-shadow: 0 6px 16px rgba(0,0,0,0.5);">
           <img src="ileaf-logo.svg" alt="iLeaf Solutions" style="height: 100%;" />
         </div>
         <div>
-          <div class="brand-sub" style="font-size:10px; font-weight:800; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:1px; margin-bottom:2px;">Platform Software by</div>
-          <div class="brand-title" style="font-size:15px; font-weight:800; color:#fff;">iLeaf Solutions</div>
+          <div class="brand-sub" style="font-size:11px; font-weight:800; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">Platform Software by</div>
+          <div class="brand-title" style="font-size:18px; font-weight:800; color:#fff;">iLeaf Solutions</div>
         </div>
       </div>
       
       <div class="brand-divider"></div>
       
       <div class="brand-item">
-        <div class="logo-box" style="height:44px; padding: 6px 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+        <div class="logo-box" style="height:48px; padding: 8px 16px; box-shadow: 0 6px 16px rgba(0,0,0,0.5);">
           <img src="ileafailogo.png" alt="iLeaf.ai" style="height: 100%;" />
         </div>
         <div>
-          <div class="brand-sub" style="font-size:10px; font-weight:800; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:1px; margin-bottom:2px;">AI & Intelligence from</div>
-          <div class="brand-title" style="font-size:15px; font-weight:800; color:#fff;">iLeaf.ai</div>
+          <div class="brand-sub" style="font-size:11px; font-weight:800; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">AI & Intelligence from</div>
+          <div class="brand-title" style="font-size:18px; font-weight:800; color:#fff;">iLeaf.ai</div>
         </div>
       </div>
     </div>
@@ -1825,7 +1880,9 @@ body{font-family:'Inter',sans-serif; background:radial-gradient(circle at top ri
 </div>
 
 <div class="slide-footer">
-  <span>Software by <a href="https://www.ileafsolutions.com" target="_blank">iLeaf Solutions</a> · Intelligence by <a href="https://www.ileaf.ai" target="_blank">iLeaf.ai</a></span>
+  <div class="footer-container">
+    <span>Software by <a href="https://www.ileafsolutions.com" target="_blank">iLeaf Solutions</a> · Intelligence by <a href="https://www.ileaf.ai" target="_blank">iLeaf.ai</a></span>
+  </div>
 </div>
 
 <script>
