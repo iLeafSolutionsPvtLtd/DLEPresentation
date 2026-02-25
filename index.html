@@ -274,9 +274,9 @@ td { padding:14px 12px; border-bottom:1px solid var(--border); }
     <div class="slide active">
       <div class="slide-inner split hero">
         <div>
-          <div class="tag">System Lifecycle · 2026</div>
+          <div class="tag">Platform Architecture · 2026</div>
           <div class="h1">Digital Learning <br/><span style="color:var(--blue3);">Ecosystem</span></div>
-          <div class="sub" style="font-size: 18px; max-width: 600px;">A comprehensive national platform connecting students, teachers, parents, schools, and authorities through intelligent, offline-capable learning. Built specifically for Nigeria's infrastructure.</div>
+          <div class="sub" style="font-size: 18px; max-width: 600px;">A comprehensive national infrastructure. DLE centralizes curriculum, automates grading, and synchronizes data offline—delivering tailored value to every stakeholder simultaneously.</div>
           <div style="display:flex;gap:12px;flex-wrap:wrap; margin-bottom: 30px;">
             <div class="glass-card" style="padding:8px 16px; font-size:13px; font-weight:700; color:var(--blue3);">Student Portal</div>
             <div class="glass-card" style="padding:8px 16px; font-size:13px; font-weight:700; color:var(--blue3);">Teacher Portal</div>
@@ -287,114 +287,116 @@ td { padding:14px 12px; border-bottom:1px solid var(--border); }
           <div style="font-size: 12px; color:rgba(255,255,255,0.4); font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Presented by iLeaf Solutions</div>
         </div>
         
-        <div style="position:relative; width:100%; height:100%; min-height: 540px; display:flex; align-items:center; justify-content:center;">
+        <div style="position:relative; width:100%; height:100%; min-height: 580px; display:flex; align-items:center; justify-content:center;">
           
           <style>
-            /* Flowing dashed lines */
-            @keyframes flowForward { to { stroke-dashoffset: -20; } }
-            .cycle-line { stroke-dasharray: 6 6; animation: flowForward 1s linear infinite; stroke: rgba(96,165,250,0.6); stroke-width: 2; }
+            /* Dual-directional data flow animations */
+            @keyframes flowIn { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+            @keyframes flowOut { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 24; } }
+            .data-in { stroke-dasharray: 4 8; animation: flowIn 1s linear infinite; stroke: rgba(59,130,246,0.8); }
+            .data-out { stroke-dasharray: 4 8; animation: flowOut 1s linear infinite; stroke: rgba(16,185,129,0.8); }
             
-            /* The sequential glowing pop-ups */
-            @keyframes actionPop {
-              0%, 2% { opacity: 0; transform: translate(-50%, 10px) scale(0.9); }
-              5%, 18% { opacity: 1; transform: translate(-50%, 0) scale(1); box-shadow: 0 10px 25px rgba(37,99,235,0.8); }
-              21%, 100% { opacity: 0; transform: translate(-50%, -10px) scale(0.9); }
-            }
-            .action-tag {
-              position: absolute;
-              background: linear-gradient(135deg, #2563eb, #1e40af);
-              border: 1px solid #60a5fa;
-              color: #fff;
-              padding: 8px 14px;
-              border-radius: 8px;
-              font-size: 11px;
-              font-weight: 800;
-              white-space: nowrap;
-              z-index: 20;
-              opacity: 0;
-              animation: actionPop 15s infinite;
-              pointer-events: none;
-            }
-            
-            /* Delays for the 15-second loop (2.5s per step) */
-            .step-1 { animation-delay: 0s; }    /* Authority */
-            .step-2 { animation-delay: 2.5s; }  /* DLE Core */
-            .step-3 { animation-delay: 5.0s; }  /* School */
-            .step-4 { animation-delay: 7.5s; }  /* Student */
-            .step-5 { animation-delay: 10.0s; } /* Teacher */
-            .step-6 { animation-delay: 12.5s; } /* Parent & Auth Report */
-
-            .core-glow { animation: float 4s ease-in-out infinite; }
+            .info-panel { background: rgba(15,23,42,0.85); border: 1px solid rgba(255,255,255,0.1); border-left: 3px solid var(--blue2); padding: 12px; border-radius: 8px; backdrop-filter: blur(10px); box-shadow: 0 10px 25px rgba(0,0,0,0.5); width: 170px; }
+            .info-panel ul { padding-left: 14px; margin-top: 6px; margin-bottom:0; color: rgba(255,255,255,0.7); font-size: 10px; line-height: 1.6; }
+            .info-panel li { margin-bottom: 3px; }
           </style>
 
-          <div style="width:100%; height:100%; border-radius:24px; overflow:hidden; position:relative; box-shadow: 0 40px 80px rgba(0,0,0,0.8); border:1px solid rgba(255,255,255,0.15); background:#0a1118;">
+          <div style="width:100%; height:100%; border-radius:24px; overflow:hidden; position:relative; box-shadow: 0 40px 80px rgba(0,0,0,0.8); border:1px solid rgba(255,255,255,0.15); background:#0f172a;">
             
-            <div style="position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop') center/cover; opacity:0.15; mix-blend-mode: screen;"></div>
-            <div style="position:absolute; inset:0; background:radial-gradient(circle at center, rgba(37,99,235,0.1) 0%, rgba(10,17,24,0.95) 80%);"></div>
+            <div style="position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop') center/cover; opacity:0.1; mix-blend-mode: overlay;"></div>
+            <div style="position:absolute; inset:0; background:radial-gradient(circle at center, rgba(37,99,235,0.1) 0%, rgba(15,23,42,1) 85%);"></div>
 
             <svg style="position:absolute; inset:0; width:100%; height:100%; z-index:1;" preserveAspectRatio="none">
-               <line x1="50%" y1="15%" x2="50%" y2="50%" class="cycle-line" />
-               <line x1="50%" y1="50%" x2="85%" y2="35%" class="cycle-line" />
-               <line x1="85%" y1="35%" x2="75%" y2="80%" class="cycle-line" />
-               <line x1="75%" y1="80%" x2="25%" y2="80%" class="cycle-line" />
-               <line x1="25%" y1="80%" x2="15%" y2="35%" class="cycle-line" />
-               <line x1="15%" y1="35%" x2="50%" y2="15%" class="cycle-line" stroke-dasharray="2 6" opacity="0.4" />
-               
-               <line x1="85%" y1="35%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
-               <line x1="75%" y1="80%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
-               <line x1="25%" y1="80%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
-               <line x1="15%" y1="35%" x2="50%" y2="50%" stroke="rgba(255,255,255,0.1)" stroke-width="1" />
+               <line x1="50%" y1="12%" x2="48%" y2="40%" class="data-in" stroke-width="2" />
+               <line x1="52%" y1="40%" x2="50%" y2="12%" class="data-out" stroke-width="2" />
+               <line x1="85%" y1="35%" x2="62%" y2="48%" class="data-in" stroke-width="2" />
+               <line x1="62%" y1="52%" x2="85%" y2="35%" class="data-out" stroke-width="2" />
+               <line x1="85%" y1="75%" x2="62%" y2="52%" class="data-in" stroke-width="2" />
+               <line x1="62%" y1="48%" x2="85%" y2="75%" class="data-out" stroke-width="2" />
+               <line x1="15%" y1="75%" x2="38%" y2="52%" class="data-in" stroke-width="2" />
+               <line x1="38%" y1="48%" x2="15%" y2="75%" class="data-out" stroke-width="2" />
+               <line x1="15%" y1="35%" x2="38%" y2="48%" class="data-in" stroke-width="2" />
+               <line x1="38%" y1="52%" x2="15%" y2="35%" class="data-out" stroke-width="2" />
             </svg>
-
-            <div class="action-tag step-1" style="top:25%; left:50%;">1. Uploads National Curriculum</div>
-            <div class="action-tag step-2" style="top:62%; left:50%; background:linear-gradient(135deg, #047857, #059669); border-color:#34d399;">2. AI Generates Syllabus & Quizzes</div>
-            <div class="action-tag step-3" style="top:48%; left:85%;">3. Approves Modules for Term</div>
-            <div class="action-tag step-4" style="top:68%; left:75%; background:linear-gradient(135deg, #b91c1c, #dc2626); border-color:#f87171;">4. Learns & Attends Tests</div>
-            <div class="action-tag step-5" style="top:68%; left:25%; background:linear-gradient(135deg, #d97706, #f59e0b); border-color:#fbbf24;">5. AI Eval & Teacher Intervention</div>
-            <div class="action-tag step-6" style="top:48%; left:15%; background:linear-gradient(135deg, #7e22ce, #9333ea); border-color:#c084fc;">6. Tracks Progress Reports</div>
-
 
             <div style="position:absolute; inset:0; z-index:2;">
                
-               <div class="core-glow glass-card" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:100px; height:100px; background:linear-gradient(135deg, rgba(10,17,24,0.95), rgba(18,30,43,0.95)); border:2px solid var(--blue2); border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; backdrop-filter:blur(12px); box-shadow: 0 0 30px rgba(37,99,235,0.3);">
-                  <div style="font-size:32px; filter: drop-shadow(0 0 10px rgba(59,130,246,0.8));">🧠</div>
-                  <div style="font-size:12px; font-weight:800; color:#fff; margin-top:4px;">DLE Core</div>
+               <div class="glass-card" style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:180px; background:linear-gradient(180deg, rgba(15,23,42,0.95), rgba(2,6,23,0.95)); border:1px solid rgba(59,130,246,0.5); border-top: 3px solid var(--blue2); padding:16px; text-align:center; box-shadow: 0 0 40px rgba(37,99,235,0.2);">
+                  <div style="font-size:14px; font-weight:800; color:#fff; letter-spacing:1px; margin-bottom:12px;">DLE CORE ENGINE</div>
+                  
+                  <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:4px; padding:6px; font-size:9px; color:var(--blue3); font-weight:700; margin-bottom:6px;">🧠 AI Content Studio</div>
+                  <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:4px; padding:6px; font-size:9px; color:var(--green); font-weight:700; margin-bottom:6px;">🔄 Offline Sync Matrix</div>
+                  <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:4px; padding:6px; font-size:9px; color:var(--amber); font-weight:700;">📊 National Data Lake</div>
                </div>
 
-               <div style="position:absolute; top:15%; left:50%; transform:translate(-50%, -50%); text-align:center; width:140px;">
-                  <div class="glass-card" style="width:48px; height:48px; border-radius:12px; display:flex; justify-content:center; align-items:center; font-size:22px; margin:0 auto 6px auto; background:rgba(96,165,250,0.1); border-color:rgba(96,165,250,0.4);">🏛️</div>
-                  <div style="font-size:12px; font-weight:800; color:#fff;">Authorities</div>
+               <div class="info-panel" style="position:absolute; top:8%; left:50%; transform:translateX(-50%); border-left-color:#60a5fa;">
+                  <div style="display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+                    <span style="font-size:16px;">🏛️</span>
+                    <span style="font-size:12px; font-weight:800; color:#fff;">National Authority</span>
+                  </div>
+                  <ul>
+                    <li>Uploads Syllabus</li>
+                    <li>Monitors Regional Heatmaps</li>
+                    <li>Tracks Literacy/Numeracy</li>
+                  </ul>
                </div>
 
-               <div style="position:absolute; top:35%; left:85%; transform:translate(-50%, -50%); text-align:center; width:140px;">
-                  <div class="glass-card" style="width:48px; height:48px; border-radius:12px; display:flex; justify-content:center; align-items:center; font-size:22px; margin:0 auto 6px auto; background:rgba(16,185,129,0.1); border-color:rgba(16,185,129,0.4);">🏫</div>
-                  <div style="font-size:12px; font-weight:800; color:#fff;">Schools</div>
+               <div class="info-panel" style="position:absolute; top:28%; right:4%; border-left-color:#10b981;">
+                  <div style="display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+                    <span style="font-size:16px;">🏫</span>
+                    <span style="font-size:12px; font-weight:800; color:#fff;">School Admin</span>
+                  </div>
+                  <ul>
+                    <li>Approves Module Visibility</li>
+                    <li>Manages Teacher Rosters</li>
+                    <li>Gets Dropout Risk Alerts</li>
+                  </ul>
                </div>
 
-               <div style="position:absolute; top:80%; left:75%; transform:translate(-50%, -50%); text-align:center; width:140px;">
-                  <div class="glass-card" style="width:48px; height:48px; border-radius:12px; display:flex; justify-content:center; align-items:center; font-size:22px; margin:0 auto 6px auto; background:rgba(239,68,68,0.1); border-color:rgba(239,68,68,0.4);">🧑‍🎓</div>
-                  <div style="font-size:12px; font-weight:800; color:#fff;">Students</div>
+               <div class="info-panel" style="position:absolute; top:68%; right:4%; border-left-color:#f59e0b;">
+                  <div style="display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+                    <span style="font-size:16px;">👨‍🏫</span>
+                    <span style="font-size:12px; font-weight:800; color:#fff;">Teachers</span>
+                  </div>
+                  <ul>
+                    <li>Approves AI Grading</li>
+                    <li>Assigns Remedial Work</li>
+                    <li>Messages Parents</li>
+                  </ul>
                </div>
 
-               <div style="position:absolute; top:80%; left:25%; transform:translate(-50%, -50%); text-align:center; width:140px;">
-                  <div class="glass-card" style="width:48px; height:48px; border-radius:12px; display:flex; justify-content:center; align-items:center; font-size:22px; margin:0 auto 6px auto; background:rgba(245,158,11,0.1); border-color:rgba(245,158,11,0.4);">👨‍🏫</div>
-                  <div style="font-size:12px; font-weight:800; color:#fff;">Teachers</div>
+               <div class="info-panel" style="position:absolute; top:68%; left:4%; border-left-color:#ef4444;">
+                  <div style="display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+                    <span style="font-size:16px;">🧑‍🎓</span>
+                    <span style="font-size:12px; font-weight:800; color:#fff;">Students</span>
+                  </div>
+                  <ul>
+                    <li>Downloads Offline Lessons</li>
+                    <li>Takes Auto-Saved Exams</li>
+                    <li>Earns Learning Rewards</li>
+                  </ul>
                </div>
 
-               <div style="position:absolute; top:35%; left:15%; transform:translate(-50%, -50%); text-align:center; width:140px;">
-                  <div class="glass-card" style="width:48px; height:48px; border-radius:12px; display:flex; justify-content:center; align-items:center; font-size:22px; margin:0 auto 6px auto; background:rgba(192,132,252,0.1); border-color:rgba(192,132,252,0.4);">👨‍👩‍👧</div>
-                  <div style="font-size:12px; font-weight:800; color:#fff;">Parents</div>
+               <div class="info-panel" style="position:absolute; top:28%; left:4%; border-left-color:#c084fc;">
+                  <div style="display:flex; align-items:center; gap:8px; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:6px;">
+                    <span style="font-size:16px;">👨‍👩‍👧</span>
+                    <span style="font-size:12px; font-weight:800; color:#fff;">Parents</span>
+                  </div>
+                  <ul>
+                    <li>Receives Live App Alerts</li>
+                    <li>Tracks Daily Study Time</li>
+                    <li>Signs Digital Reports</li>
+                  </ul>
                </div>
 
             </div>
 
-            <div style="position:absolute; top:20px; left:20px; z-index:3; display:flex; flex-direction:column; gap:6px; background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.1);">
-               <div style="font-size:9px; font-weight:800; letter-spacing:1px; color:rgba(255,255,255,0.7); margin-bottom:4px;">LIVE DATA FLOW</div>
-               <div style="display:flex; align-items:center; gap:8px; font-size:10px; color:#fff;">
-                 <span style="display:inline-block; width:16px; height:2px; background:var(--blue2);"></span> Primary Content Lifecycle
+            <div style="position:absolute; bottom:20px; left:50%; transform:translateX(-50%); z-index:3; display:flex; gap:16px; background:rgba(0,0,0,0.6); padding:8px 16px; border-radius:20px; border:1px solid rgba(255,255,255,0.1);">
+               <div style="display:flex; align-items:center; gap:6px; font-size:10px; color:rgba(255,255,255,0.7); font-weight:700;">
+                 <span style="display:inline-block; width:12px; height:2px; background:var(--blue2);"></span> Requests & Data In
                </div>
-               <div style="display:flex; align-items:center; gap:8px; font-size:10px; color:rgba(255,255,255,0.6);">
-                 <span style="display:inline-block; width:16px; height:1px; background:rgba(255,255,255,0.3);"></span> Live Analytics Syncing
+               <div style="display:flex; align-items:center; gap:6px; font-size:10px; color:rgba(255,255,255,0.7); font-weight:700;">
+                 <span style="display:inline-block; width:12px; height:2px; background:var(--green);"></span> Insights & Value Out
                </div>
             </div>
           </div>
