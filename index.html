@@ -245,6 +245,15 @@ td { padding:14px 12px; border-bottom:1px solid var(--border); }
   .brand-item .brand-title { font-size: 14px !important; }
 }
 </style>
+
+<!-- PostHog Analytics -->
+<script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group identify setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags resetGroups onFeatureFlags addFeatureFlagsHandler onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_p1FZBxrHBsw46FNTBYyh5mhgKtwohgp63QOjdN95PVD', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-01-30'
+    })
+</script>
 </head>
 <body>
 
@@ -2076,6 +2085,17 @@ function updateProgress() {
   pBar.style.width = pct + '%';
 }
 
+// Helper to get the slide section name from .tag element
+function getSlideName(index) {
+  const slide = slides[index];
+  const tagEl = slide.querySelector('.tag');
+  if (tagEl) return tagEl.textContent.trim();
+  // Fallback: check for .h2 heading
+  const h2El = slide.querySelector('.h2');
+  if (h2El) return h2El.textContent.trim().replace(/\n/g, ' ');
+  return 'Slide ' + (index + 1);
+}
+
 function go(n){
   if(n<0||n>=N)return;
   slides[cur].classList.remove('active');
@@ -2085,6 +2105,16 @@ function go(n){
   setTimeout(()=>slides[prev].classList.remove('out'), 500);
   slides[cur].classList.add('active');
   updateProgress();
+
+  // PostHog: track slide view
+  if (window.posthog) {
+    posthog.capture('slide_viewed', {
+      slide_number: cur + 1,
+      slide_total: N,
+      slide_name: getSlideName(cur),
+      direction: n > prev ? 'forward' : 'backward'
+    });
+  }
 }
 function next(){go(cur+1);}
 function prev(){go(cur-1);}
@@ -2096,6 +2126,14 @@ document.addEventListener('keydown',e=>{
 
 // Initialize
 updateProgress();
+
+// PostHog: track initial page load with first slide
+if (window.posthog) {
+  posthog.capture('presentation_loaded', {
+    total_slides: N,
+    first_slide_name: getSlideName(0)
+  });
+}
 </script>
 </body>
 </html>
